@@ -6,6 +6,12 @@
 <meta name="theme-color" content="#0b1020">
 <title>ATHLETIC OS 3.2</title>
 <link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+<link rel="manifest" href="./manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ATHLETIC OS">
 
 <style>
 :root{
@@ -3841,6 +3847,16 @@ initializeApp();
 
 /* ---------- ENDE TEIL 4 ---------- */
 
+</script>
+
+<script>
+// ATHLETIC OS PWA: Service Worker registration
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js", { scope: "./" })
+      .catch(error => console.error("PWA-Service-Worker konnte nicht registriert werden:", error));
+  });
+}
 </script>
 </body>
 </html>
