@@ -1,147 +1,3587 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
- <title>ATHLETIC OS 3.0</title>
-<link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b1020">
+<title>ATHLETIC OS 3.1</title>
+<link rel="icon" type="image/png" href="logo.png">
+
 <style>
-:root{--bg:#0b1020;--panel:#131b30;--panel2:#1a2540;--line:#293653;--text:#f4f7ff;--muted:#9aa8c3;--accent:#a3ff6f;--cyan:#63e6e2;--purple:#b6a0ff;--danger:#ff7c91;--radius:18px}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#23345b 0,transparent 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
-button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 15px;font-weight:750;transition:.18s}button:hover{filter:brightness(1.1);transform:translateY(-1px)}.primary{background:var(--accent);color:#101827}.secondary{background:#263451;color:var(--text);border:1px solid var(--line)}.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}.danger{background:#492638;color:#ffdbe2}
-header{max-width:1200px;margin:auto;padding:22px 22px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:950;letter-spacing:2px;font-size:20px}.brand span{color:var(--accent)}.version{font-size:11px;color:var(--cyan);letter-spacing:1.5px;border:1px solid #3b6572;padding:7px 10px;border-radius:99px}
-main{max-width:1200px;margin:auto;padding:12px 22px 110px}.topline{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:18px 0 22px}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);font-weight:800}.title{font-size:clamp(28px,5vw,42px);font-weight:900;letter-spacing:-1.5px;margin:5px 0}.muted{color:var(--muted)}.small{font-size:13px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:linear-gradient(145deg,#17213a,#111a2d);border:1px solid var(--line);border-radius:var(--radius);padding:18px;min-width:0;box-shadow:0 10px 30px #0002}.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}.stat{font-size:30px;font-weight:900;margin-top:8px}.statlabel{font-size:12px;color:var(--muted)}.progress{height:9px;background:#263451;border-radius:99px;overflow:hidden;margin:12px 0}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--cyan));border-radius:99px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.rowstart{display:flex;align-items:center;gap:12px}.pill{font-size:11px;border:1px solid var(--line);color:var(--cyan);border-radius:99px;padding:5px 9px;white-space:nowrap}.tabs{display:flex;gap:7px;overflow:auto;padding:10px 0 14px;scrollbar-width:none}.tabs button{white-space:nowrap;background:transparent;color:var(--muted);border:1px solid transparent;padding:10px 13px}.tabs button.active{background:var(--accent);color:#101827}.view{display:none}.view.active{display:block}.field{width:100%;background:#0e172a;color:var(--text);border:1px solid var(--line);padding:12px;border-radius:11px;margin:6px 0 12px;outline:none}.field:focus{border-color:var(--cyan)}label{font-size:12px;color:var(--muted);font-weight:700}.exercise{display:flex;align-items:flex-start;gap:13px;padding:13px 0;border-bottom:1px solid #293653}.exercise:last-child{border:0}.exercise-icon{width:48px;height:48px;border-radius:14px;background:#263451;display:grid;place-items:center;font-size:22px;flex:none}.exercise-main{flex:1;min-width:0}.exercise h3{margin:0 0 4px;font-size:16px}.exercise p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.chiprow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.chip{background:#202d48;color:#c8d5ee;padding:4px 8px;border-radius:7px;font-size:10px}.listitem{padding:13px;background:#0e172a;border:1px solid var(--line);border-radius:13px;margin:9px 0}.listitem h3{margin:0 0 5px;font-size:15px}.listitem p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.empty{padding:28px;text-align:center;border:1px dashed #3a4969;border-radius:14px;color:var(--muted)}.bar{display:flex;gap:3px;align-items:end;height:100px;margin-top:12px}.bar i{flex:1;background:linear-gradient(180deg,var(--cyan),#5275a9);border-radius:5px 5px 0 0;min-height:3px}.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.heat i{aspect-ratio:1;border-radius:4px;background:#263451}.heat i.l1{background:#416d59}.heat i.l2{background:#609b65}.heat i.l3{background:#a3ff6f}.bottomnav{display:none}.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:#eaffdc;color:#102016;padding:13px 18px;border-radius:14px;font-weight:850;z-index:30;box-shadow:0 12px 40px #0008;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}.modal{position:fixed;inset:0;background:#050914d9;display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modal.show{display:flex}.modalbox{width:min(620px,100%);max-height:90vh;overflow:auto;background:#151f35;border:1px solid #405071;border-radius:20px;padding:22px}.timer{font-size:48px;font-weight:950;letter-spacing:2px;text-align:center;margin:14px}.doneflash{animation:flash .7s ease 2}@keyframes flash{50%{box-shadow:0 0 0 5px #a3ff6f66,0 0 45px #a3ff6f66}}.rankpop{animation:pop .55s cubic-bezier(.2,1.6,.4,1)}@keyframes pop{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}.skillbar{height:7px;background:#263451;border-radius:9px;margin-top:9px;overflow:hidden}.skillbar i{display:block;height:100%;background:var(--purple)}.footer{color:var(--muted);text-align:center;font-size:11px;margin:28px 0}
-@media(max-width:760px){header{padding:17px 16px}main{padding:8px 15px 100px}.span-3,.span-4,.span-5,.span-6,.span-7,.span-8{grid-column:span 6}.span-12{grid-column:span 12}.bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;background:#0c1426ed;backdrop-filter:blur(15px);border-top:1px solid var(--line);padding:8px 5px calc(8px + env(safe-area-inset-bottom));justify-content:space-around}.bottomnav button{background:transparent;color:var(--muted);font-size:10px;padding:7px 5px;display:flex;flex-direction:column;gap:4px;align-items:center}.bottomnav button.active{color:var(--accent)}.bottomnav b{font-size:18px}.tabs{display:none}.two,.three{grid-template-columns:1fr 1fr}.topline{align-items:start;flex-direction:column}}
-@media(max-width:430px){.span-3,.span-4,.span-5,.span-6,.span-7,.span-8{grid-column:span 12}.two,.three{grid-template-columns:1fr 1fr}.card{padding:15px}.stat{font-size:26px}}
+:root{
+  --bg:#0b1020;
+  --panel:#131b30;
+  --panel2:#1a2540;
+  --line:#293653;
+  --text:#f4f7ff;
+  --muted:#9aa8c3;
+  --accent:#a3ff6f;
+  --cyan:#63e6e2;
+  --purple:#b6a0ff;
+  --danger:#ff7c91;
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at top left,rgba(99,230,226,.09),transparent 35%),
+    radial-gradient(ellipse at top right,rgba(163,255,111,.07),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  padding-bottom:90px;
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.app{
+  width:min(1100px,100%);
+  margin:auto;
+  padding:20px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.logo span{
+  color:var(--accent);
+}
+
+.version{
+  color:var(--muted);
+  font-size:11px;
+  border:1px solid var(--line);
+  padding:6px 10px;
+  border-radius:20px;
+}
+
+.page-title{
+  margin-bottom:20px;
+}
+
+.page-title h1{
+  font-size:27px;
+  margin-bottom:6px;
+}
+
+.page-title p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.view{
+  display:none;
+  animation:fadeIn .25s ease;
+}
+
+.view.active{
+  display:block;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.card{
+  background:linear-gradient(145deg,#17213a,#111a2d);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:19px;
+  margin-bottom:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,.13);
+}
+
+.card h2{
+  font-size:17px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  font-size:15px;
+  margin-bottom:8px;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.small{
+  font-size:12px;
+}
+
+.accent{
+  color:var(--accent);
+}
+
+.cyan{
+  color:var(--cyan);
+}
+
+.purple{
+  color:var(--purple);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.stat-card{
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--line);
+  padding:14px;
+  border-radius:14px;
+}
+
+.stat-card .value{
+  font-size:25px;
+  font-weight:800;
+  margin:7px 0 3px;
+}
+
+.stat-card .label{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.progress-track{
+  height:9px;
+  background:#26334f;
+  border-radius:20px;
+  overflow:hidden;
+  margin:10px 0;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--cyan));
+  border-radius:20px;
+  transition:width .4s ease;
+}
+
+.btn{
+  border:1px solid var(--line);
+  color:var(--text);
+  background:var(--panel2);
+  padding:11px 15px;
+  border-radius:12px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.btn:hover{
+  border-color:var(--cyan);
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  color:#101827;
+  background:linear-gradient(110deg,var(--accent),var(--cyan));
+  border:0;
+}
+
+.btn-danger{
+  color:var(--danger);
+  border-color:rgba(255,124,145,.4);
+}
+
+.btn-small{
+  padding:7px 11px;
+  font-size:12px;
+}
+
+.btn-row{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.input{
+  width:100%;
+  padding:12px;
+  color:var(--text);
+  background:#0d1629;
+  border:1px solid var(--line);
+  border-radius:11px;
+  outline:none;
+  margin-top:6px;
+}
+
+.input:focus{
+  border-color:var(--cyan);
+}
+
+.field{
+  margin-bottom:13px;
+}
+
+.field label{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  font-size:11px;
+  border-radius:20px;
+  background:rgba(163,255,111,.09);
+  color:var(--accent);
+  border:1px solid rgba(163,255,111,.2);
+}
+
+.pill-cyan{
+  background:rgba(99,230,226,.08);
+  color:var(--cyan);
+  border-color:rgba(99,230,226,.2);
+}
+
+.divider{
+  height:1px;
+  background:var(--line);
+  margin:15px 0;
+}
+
+.section-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.section-heading h2{
+  font-size:17px;
+}
+
+.list-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.list-item:last-child{
+  border-bottom:0;
+}
+
+.exercise-card{
+  padding:15px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  margin-bottom:10px;
+}
+
+.exercise-card p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+  margin-top:5px;
+}
+
+.empty{
+  text-align:center;
+  padding:25px 10px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.bottom-nav{
+  position:fixed;
+  z-index:50;
+  bottom:0;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-around;
+  background:rgba(11,16,32,.96);
+  backdrop-filter:blur(15px);
+  border-top:1px solid var(--line);
+  padding:9px 4px calc(9px + env(safe-area-inset-bottom));
+}
+
+.nav-btn{
+  flex:1;
+  background:none;
+  border:0;
+  color:var(--muted);
+  font-size:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  padding:5px 2px;
+}
+
+.nav-btn .nav-icon{
+  font-size:19px;
+}
+
+.nav-btn.active{
+  color:var(--accent);
+}
+
+.toast{
+  position:fixed;
+  z-index:100;
+  left:50%;
+  bottom:95px;
+  transform:translateX(-50%) translateY(15px);
+  background:#202d47;
+  border:1px solid var(--line);
+  color:var(--text);
+  padding:12px 17px;
+  border-radius:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  font-size:13px;
+  max-width:90%;
+  text-align:center;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+.modal-backdrop{
+  position:fixed;
+  z-index:80;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:min(500px,100%);
+  max-height:85vh;
+  overflow:auto;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.modal-close{
+  border:0;
+  color:var(--muted);
+  background:none;
+  font-size:24px;
+}
+
+.timer-display{
+  font-size:48px;
+  font-weight:900;
+  text-align:center;
+  letter-spacing:2px;
+  margin:15px 0;
+  font-variant-numeric:tabular-nums;
+}
+
+.timer-options{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.set-row{
+  display:grid;
+  grid-template-columns:35px 1fr 90px 30px;
+  align-items:center;
+  gap:8px;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.set-row input[type=number]{
+  width:100%;
+  min-width:0;
+  background:#0d1629;
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:8px;
+}
+
+.set-row input[type=checkbox]{
+  accent-color:var(--accent);
+  width:18px;
+  height:18px;
+}
+
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:8px;
+  background:rgba(182,160,255,.1);
+  color:var(--purple);
+  font-size:11px;
+}
+
+.chart-bars{
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  height:130px;
+  padding:10px 0;
+}
+
+.chart-bar-wrap{
+  flex:1;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+}
+
+.chart-bar{
+  width:100%;
+  max-width:30px;
+  min-height:3px;
+  border-radius:7px 7px 2px 2px;
+  background:linear-gradient(180deg,var(--cyan),var(--accent));
+}
+
+.chart-bar-wrap span{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.heatmap{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:5px;
+}
+
+.heat-cell{
+  aspect-ratio:1;
+  border-radius:4px;
+  background:#202d47;
+}
+
+.heat-cell.active{
+  background:var(--accent);
+}
+
+.heat-cell.medium{
+  background:#5a9c69;
+}
+
+.skill-card{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:10px;
+}
+
+.skill-card.unlocked{
+  border-color:rgba(163,255,111,.5);
+}
+
+.rank-animation{
+  animation:rankGlow 1.2s ease;
+}
+
+@keyframes rankGlow{
+  0%{box-shadow:0 0 0 rgba(163,255,111,0)}
+  40%{box-shadow:0 0 35px rgba(163,255,111,.45)}
+  100%{box-shadow:0 0 0 rgba(163,255,111,0)}
+}
+
+@media(min-width:760px){
+  body{padding-bottom:25px}
+  .bottom-nav{
+    position:sticky;
+    top:0;
+    bottom:auto;
+    margin:-10px -20px 25px;
+    padding:12px 15px;
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  .nav-btn{
+    flex-direction:row;
+    justify-content:center;
+    font-size:12px;
+  }
+  .nav-btn .nav-icon{font-size:16px}
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+@media(max-width:430px){
+  .app{padding:15px}
+  .page-title h1{font-size:24px}
+  .card{padding:15px}
+  .timer-display{font-size:40px}
+  .set-row{grid-template-columns:25px 1fr 75px 25px;gap:5px}
+}
 </style>
 </head>
+
 <body>
-<header><div><div class="brand">ATHLETIC <span>OS</span></div><div class="muted small">TRAIN · PROGRESS · MASTER</div></div><div class="version">VERSION 3.0</div></header>
-<main>
-<nav class="tabs" id="topTabs"></nav>
-<section class="view active" id="view-home">
- <div class="topline"><div><div class="eyebrow">PERSONAL PERFORMANCE SYSTEM</div><div class="title">Dein Fortschritt.<br><span style="color:var(--accent)">Dein System.</span></div><div class="muted">Willkommen zurück. Was steht heute an?</div></div><button class="primary" onclick="openTab('training')">Training starten →</button></div>
- <div class="grid">
-  <div class="card span-7"><div class="row"><div><div class="eyebrow">CURRENT RANK</div><h2 id="homeRank">Rookie I</h2></div><span class="pill" id="homeXp">0 XP</span></div><div class="progress"><i id="rankProgress" style="width:0%"></i></div><div class="row small muted"><span id="rankNext">0 XP bis zum nächsten Rang</span><span id="rankPercent">0%</span></div></div>
-  <div class="card span-5"><div class="eyebrow">THIS WEEK</div><div class="stat" id="weekCount">0 / 4</div><div class="muted small">abgeschlossene Trainings</div><div class="progress"><i id="weekProgress" style="width:0%"></i></div></div>
-  <div class="card span-3"><div class="stat" id="totalSessions">0</div><div class="statlabel">Trainings</div></div><div class="card span-3"><div class="stat" id="totalMinutes">0</div><div
-class="statlabel">Trainingsminuten</div></div><div class="card span-3"><div class="stat" id="totalSets">0</div><div class="statlabel">Sätze abgeschlossen</div></div><div class="card span-3"><div class="stat" id="streak">0</div><div class="statlabel">Tage Trainingsserie</div></div>
-  <div class="card span-6"><div class="row"><h3>Dein nächster Schritt</h3><span class="pill">FOCUS</span></div><p class="muted small" id="nextTip">Erstelle dein Profil und starte mit einem passenden Training.</p><div class="actions"><button class="secondary" onclick="openTab('skills')">Skills ansehen</button><button class="secondary" onclick="openTab('plans')">Meine Pläne</button></div></div>
-  <div class="card span-6"><div class="row"><h3>Letztes Training</h3><span class="pill">RECENT</span></div><div id="lastWorkout" class="muted small">Noch kein Training gespeichert.</div></div>
- </div>
+<div class="app">
+
+<header>
+  <div class="logo">ATHLETIC <span>OS</span></div>
+  <div class="version">VERSION 3.1</div>
+</header>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-tab="home" onclick="openTab('home')">
+    <span class="nav-icon">⌂</span>Home
+  </button>
+  <button class="nav-btn" data-tab="training" onclick="openTab('training')">
+    <span class="nav-icon">⚡</span>Training
+  </button>
+  <button class="nav-btn" data-tab="plans" onclick="openTab('plans')">
+    <span class="nav-icon">▤</span>Pläne
+  </button>
+  <button class="nav-btn" data-tab="library" onclick="openTab('library')">
+    <span class="nav-icon">◈</span>Übungen
+  </button>
+  <button class="nav-btn" data-tab="progress" onclick="openTab('progress')">
+    <span class="nav-icon">↗</span>Fortschritt
+  </button>
+  <button class="nav-btn" data-tab="profile" onclick="openTab('profile')">
+    <span class="nav-icon">◎</span>Profil
+  </button>
+</nav>
+
+<!-- HOME -->
+<section class="view active" id="home">
+  <div class="page-title">
+    <h1>Dashboard</h1>
+    <p>Dein Training. Dein Fortschritt. Dein System.</p>
+  </div>
+
+  <div class="card" id="rankCard">
+    <div class="section-heading">
+      <div>
+        <div class="small muted">DEIN AKTUELLER RANG</div>
+        <h2 id="rankName" class="accent">Rookie</h2>
+      </div>
+      <span class="pill" id="levelLabel">Level 1</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="xpBar"></div>
+    </div>
+    <div class="small muted" id="xpText">0 XP</div>
+  </div>
+
+  <div class="card">
+    <div class="section-heading">
+      <h2>Diese Woche</h2>
+      <span class="pill pill-cyan" id="weeklyGoalLabel">0 / 3 Trainings</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="weeklyGoalBar"></div>
+    </div>
+    <p class="small muted" id="weeklyGoalText">Dein Wochenziel im Blick behalten.</p>
+  </div>
+
+  <div class="grid">
+    <div class="stat-card">
+      <div class="label">Trainings</div>
+      <div class="value" id="statWorkouts">0</div>
+      <div class="small muted">Gesamt</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Wiederholungen</div>
+      <div class="value accent" id="statReps">0</div>
+      <div class="small muted">Gesamt</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Haltezeit</div>
+      <div class="value cyan" id="statSeconds">0</div>
+      <div class="small muted">Sekunden</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Serie</div>
+      <div class="value" id="statStreak">0</div>
+      <div class="small muted">Tage</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:15px">
+    <div class="section-heading">
+      <h2>Letztes Training</h2>
+      <button class="btn btn-small" onclick="openTab('progress')">Verlauf</button>
+    </div>
+    <div id="lastWorkout" class="muted small">Noch kein Training gespeichert.</div>
+  </div>
+
+  <div class="card">
+    <div class="section-heading">
+      <h2>Quick Start</h2>
+      <span class="pill">Direkt loslegen</span>
+    </div>
+    <p class="small muted">Starte eine freie Trainingseinheit oder wähle einen gespeicherten Plan.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="openTab('training')">Training starten</button>
+      <button class="btn" onclick="openTab('plans')">Pläne ansehen</button>
+    </div>
+  </div>
 </section>
-<section class="view" id="view-training">
- <div class="topline"><div><div class="eyebrow">SESSION BUILDER</div><div class="title">Training</div><div class="muted">Generiere eine Einheit oder starte einen gespeicherten Plan.</div></div></div>
- <div class="grid"><div class="card span-5"><h3>Automatisches Training</h3><label>Trainingsdauer</label><select id="genMinutes" class="field"><option value="15">15 Minuten</option><option value="25" selected>25 Minuten</option><option value="40">40 Minuten</option></select><label>Schwerpunkt</label><select id="genFocus" class="field"><option>Ausgewogen</option><option>Kraft</option><option>Stabilität</option><option>Beweglichkeit</option><option>Körperkontrolle</option></select><button class="primary" style="width:100%" onclick="generateWorkout()">Training generieren</button></div><div class="card span-7"><div class="row"><h3>Aktuelle Einheit</h3><span class="pill" id="sessionSource">READY</span></div><div id="sessionArea" class="empty">Wähle einen Generator oder starte einen eigenen Trainingsplan.</div></div></div>
+
+<!-- TRAINING -->
+<section class="view" id="training">
+  <div class="page-title">
+    <h1>Training</h1>
+    <p>Erstelle eine Einheit und dokumentiere deine tatsächliche Leistung.</p>
+  </div>
+
+  <div id="trainingSetup">
+    <div class="card">
+      <h2>Training erstellen</h2>
+      <p class="small muted">Stelle dir eine Einheit aus deiner Übungsbibliothek zusammen.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="generateWorkout()">Training generieren</button>
+        <button class="btn" onclick="openTab('library')">Übungen auswählen</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Eigene Einheit</h2>
+      <div id="trainingPicker"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="startCustomWorkout()">Einheit starten</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="activeTraining" class="hidden">
+    <div class="card">
+      <div class="section-heading">
+        <div>
+          <div class="small muted">AKTIVE EINHEIT</div>
+          <h2 id="sessionTitle">Training</h2>
+        </div>
+        <span class="pill" id="sessionSetCount">0 Sätze</span>
+      </div>
+      <div id="sessionExercises"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="finishSession()">Training beenden</button>
+        <button class="btn btn-danger" onclick="cancelSession()">Abbrechen</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Pause-Timer</h2>
+      <div class="timer-display" id="timerDisplay">01:00</div>
+      <div class="timer-options">
+        <button class="btn btn-small" onclick="setTimer(30)">30 s</button>
+        <button class="btn btn-small" onclick="setTimer(60)">60 s</button>
+        <button class="btn btn-small" onclick="setTimer(90)">90 s</button>
+        <button class="btn btn-small" onclick="setTimer(120)">120 s</button>
+      </div>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn btn-primary" id="timerToggle" onclick="toggleTimer()">Start</button>
+        <button class="btn" onclick="stopTimer()">Zurücksetzen</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Stoppuhr</h2>
+      <div class="timer-display" id="stopwatchDisplay">00:00</div>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn btn-primary" id="stopwatchToggle" onclick="toggleStopwatch()">Start</button>
+        <button class="btn" onclick="resetStopwatch()">Reset</button>
+      </div>
+    </div>
+  </div>
 </section>
-<section class="view" id="view-plans">
- <div class="topline"><div><div class="eyebrow">YOUR PROGRAMS</div><div class="title">Meine Pläne</div><div class="muted">Stelle deine eigenen Einheiten zusammen und speichere sie.</div></div><button class="primary" onclick="newPlan()">＋ Neuer Plan</button></div>
- <div class="grid"><div class="card span-5"><h3>Plan-Editor</h3><label>Planname</label><input id="planName" class="field" placeholder="z. B. Push & Core"><label>Übungen hinzufügen</label><input id="planSearch" class="field" placeholder="Übung suchen..." oninput="renderPlanPicker()"><div id="planPicker"></div><div class="row"><b id="planCount">0 Übungen</b><button class="primary" onclick="savePlan()">Plan speichern</button></div></div><div class="card span-7"><h3>Deine gespeicherten Pläne</h3><div id="plansList" class="muted small">Noch keine eigenen Pläne erstellt.</div></div></div>
+
+<!-- PLANS -->
+<section class="view" id="plans">
+  <div class="page-title">
+    <h1>Trainingspläne</h1>
+    <p>Erstelle, speichere und verwalte deine eigenen Einheiten.</p>
+  </div>
+  <div class="card">
+    <div class="section-heading">
+      <h2>Neuen Plan erstellen</h2>
+    </div>
+    <div class="field">
+      <label for="planName">Name des Plans</label>
+      <input class="input" id="planName" placeholder="z. B. Upper Body">
+    </div>
+    <div id="planPicker"></div>
+    <div id="planDraft"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="savePlan()">Plan speichern</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Gespeicherte Pläne</h2>
+    <div id="savedPlans"></div>
+  </div>
 </section>
-<section class="view" id="view-library">
- <div class="topline"><div><div class="eyebrow">EXERCISE DATABASE</div><div class="title">Übungsbibliothek</div><div class="muted">Finde Übungen, lerne die Technik und erstelle eigene Varianten.</div></div><button class="primary" onclick="openCustomExercise()">＋ Eigene Übung</button></div>
- <div class="card"><div class="two"><input id="libSearch" class="field" placeholder="Übung suchen..." oninput="renderLibrary()"><select id="libCategory" class="field" onchange="renderLibrary()"><option value="">Alle Kategorien</option><option>Push</option><option>Pull</option><option>Core</option><option>Legs</option><option>Mobility</option><option>Skill</option><option>Eigene Übung</option></select></div><div id="libraryList"></div></div>
+
+<!-- LIBRARY -->
+<section class="view" id="library">
+  <div class="page-title">
+    <h1>Übungsbibliothek</h1>
+    <p>Finde Übungen, lerne die Technik und entdecke neue Progressionen.</p>
+  </div>
+  <div class="card">
+    <input class="input" id="exerciseSearch" placeholder="Übung suchen..." oninput="renderLibrary()">
+    <div class="btn-row" id="categoryFilters"></div>
+  </div>
+  <div id="libraryList"></div>
+  <div class="card">
+    <h2>Eigene Übung hinzufügen</h2>
+    <div class="field">
+      <label>Name</label>
+      <input class="input" id="customName" placeholder="Übungsname">
+    </div>
+    <div class="field">
+      <label>Muskelgruppe</label>
+      <input class="input" id="customMuscles" placeholder="z. B. Brust, Trizeps">
+    </div>
+    <div class="field">
+      <label>Schwierigkeit</label>
+      <select class="input" id="customLevel">
+        <option>Einfach</option>
+        <option>Mittel</option>
+        <option>Schwer</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Einheit</label>
+      <select class="input" id="customUnit">
+        <option value="Wiederholungen">Wiederholungen</option>
+        <option value="Sekunden">Sekunden</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Ausführung</label>
+      <textarea class="input" id="customHow" rows="3" placeholder="Wie wird die Übung ausgeführt?"></textarea>
+    </div>
+    <div class="field">
+      <label>Technikhinweis</label>
+      <textarea class="input" id="customTip" rows="2" placeholder="Worauf sollte man achten?"></textarea>
+    </div>
+    <button class="btn btn-primary" onclick="addCustomExercise()">Übung speichern</button>
+  </div>
 </section>
-<section class="view" id="view-skills">
- <div class="topline"><div><div class="eyebrow">BODY CONTROL</div><div class="title">Skill Tree</div><div class="muted">Arbeite dich Schritt für Schritt zu neuen Skills vor.</div></div></div><div class="grid" id="skillList"></div>
+
+<!-- SKILLS -->
+<section class="view" id="skills">
+  <div class="page-title">
+    <h1>Skills</h1>
+    <p>Behalte deine Calisthenics-Ziele und Fortschritte im Blick.</p>
+  </div>
+  <div id="skillsList"></div>
 </section>
-<section class="view" id="view-progress">
- <div class="topline"><div><div class="eyebrow">YOUR DATA</div><div class="title">Fortschritt</div><div class="muted">Trainingsverlauf, Rekorde und Aktivität.</div></div></div>
- <div class="grid"><div class="card span-4"><div class="stat" id="statSessions">0</div><div class="statlabel">Trainings insgesamt</div></div><div class="card span-4"><div class="stat" id="statReps">0</div><div class="statlabel">Wiederholungen / Sekunden</div></div><div class="card span-4"><div class="stat" id="statXP">0</div><div class="statlabel">Gesammelte XP</div></div><div class="card span-12"><h3>Letzte 8 Wochen</h3><div class="bar" id="weeklyBars"></div><div class="row muted small"><span>Älter</span><span>Aktueller Zeitraum</span></div></div><div class="card span-12"><h3>Aktivitäts-Heatmap</h3><p class="muted small">Deine Trainingstage der letzten 12 Wochen.</p><div id="heatmap" class="heat"></div></div><div class="card span-12"><h3>Persönliche Rekorde</h3><div id="recordsList" class="muted small"></div></div></div>
+
+<!-- PROGRESS -->
+<section class="view" id="progress">
+  <div class="page-title">
+    <h1>Fortschritt</h1>
+    <p>Analysiere deine Trainingsentwicklung.</p>
+  </div>
+  <div class="grid">
+    <div class="stat-card">
+      <div class="label">Trainings</div>
+      <div class="value" id="progressWorkouts">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Sätze</div>
+      <div class="value" id="progressSets">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Wiederholungen</div>
+      <div class="value" id="progressReps">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Haltezeit</div>
+      <div class="value" id="progressSeconds">0 s</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:15px">
+    <h2>Trainings der letzten 8 Wochen</h2>
+    <div id="weeklyChart" class="chart-bars"></div>
+  </div>
+  <div class="card">
+    <h2>Trainingsaktivität</h2>
+    <div id="heatmap" class="heatmap"></div>
+  </div>
+  <div class="card">
+    <h2>Trainingsverlauf</h2>
+    <div id="workoutHistory"></div>
+  </div>
 </section>
-<section class="view" id="view-profile">
- <div class="topline"><div><div class="eyebrow">SETTINGS & BACKUP</div><div class="title">Profil</div><div class="muted">Trainingsziele, Datensicherung und Einstellungen.</div></div></div>
- <div class="grid"><div class="card span-6"><h3>Trainingsprofil</h3><label>Trainingsniveau</label><select id="profileLevel" class="field"><option value="0">Einsteiger</option><option value="1">Grundlagen</option><option value="2">Fortgeschritten</option></select><label>Wochenziel</label><select id="weeklyGoalInput" class="field"><option>2</option><option>3</option><option>4</option><option>5</option></select><label>Trainingsfokus</label><select id="profileFocus" class="field"><option>Ausgewogen</option><option>Kraft</option><option>Stabilität</option><option>Beweglichkeit</option><option>Körperkontrolle</option></select><button class="primary" onclick="saveProfile()">Profil speichern</button></div><div class="card span-6"><h3>Datensicherung</h3><p class="muted small">Exportiere regelmäßig ein Backup. Die Daten liegen lokal in diesem Browser.</p><div class="actions"><button class="secondary" onclick="exportBackup()">Backup exportieren</button><label class="secondary" style="padding:12px;border-radius:12px;cursor:pointer">Backup importieren<input type="file" accept="application/json" style="display:none" onchange="importBackup(event)"></label></div><p class="muted small" id="migrationInfo" style="margin-top:15px"></p></div><div class="card span-12"><h3>Achievements</h3><div id="achievementList" class="two"></div></div></div>
+
+<!-- PROFILE -->
+<section class="view" id="profile">
+  <div class="page-title">
+    <h1>Profil</h1>
+    <p>Verwalte deine Ziele und deine Daten.</p>
+  </div>
+  <div class="card">
+    <h2>Deine Einstellungen</h2>
+    <div class="field">
+      <label for="profileName">Name</label>
+      <input class="input" id="profileName" placeholder="Dein Name">
+    </div>
+    <div class="field">
+      <label for="weeklyGoal">Wöchentliches Trainingsziel</label>
+      <input class="input" id="weeklyGoal" type="number" min="1" max="14" value="3">
+    </div>
+    <div class="field">
+      <label for="trainingFocus">Trainingsfokus</label>
+      <select class="input" id="trainingFocus">
+        <option>Ganzkörper</option>
+        <option>Oberkörper</option>
+        <option>Unterkörper</option>
+        <option>Core</option>
+        <option>Skills</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" onclick="saveProfile()">Einstellungen speichern</button>
+  </div>
+  <div class="card">
+    <h2>Datensicherung</h2>
+    <p class="small muted">Exportiere deine Daten als JSON-Datei oder stelle ein vorhandenes Backup wieder her.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="exportBackup()">Backup exportieren</button>
+      <button class="btn" onclick="document.getElementById('importFile').click()">Backup importieren</button>
+      <input type="file" id="importFile" accept=".json,application/json" hidden onchange="importBackup(event)">
+    </div>
+  </div>
+  <div class="card">
+    <h2>ATHLETIC OS</h2>
+    <p class="small muted">Version 3.1 · Lokale Datenspeicherung · Keine Anmeldung erforderlich</p>
+  </div>
 </section>
-<div class="footer">ATHLETIC OS 3.0 · YOUR TRAINING SYSTEM</div>
-</main>
-<nav class="bottomnav" id="bottomNav"></nav>
+
+</div>
+
 <div class="toast" id="toast"></div>
-<div class="modal" id="modal"><div class="modalbox" id="modalContent"></div></div>
+
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">Details</h2>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div id="modalContent"></div>
+  </div>
+</div>
 <script>
-const STORE='athletic_os_v3',OLD_KEYS=['calisthenics_progression_v22','calisthenics_progression_v2','calisthenics_training_v1'];
-const rankNames=['Rookie I','Rookie II','Rookie III','Rookie IV','Beginner I','Beginner II','Beginner III','Beginner IV','Athlete I','Athlete II','Athlete III','Athlete IV','Advanced I','Advanced II','Advanced III','Advanced IV','Street Legend I','Street Legend II','Street Legend III','Street Legend IV'];
-const threshold=i=>Math.round(100*Math.pow(i,1.35));
-const baseExercises=[
-['wall_push','Wand-Liegestütze','Push','Beginner','Wiederholungen','Brust, Schultern, Trizeps','Hände an eine stabile Wand setzen, Körper in einer Linie halten und kontrolliert zur Wand bewegen.','Körper bleibt stabil; Bewegung ruhig ausführen.'],
-['incline_push','Erhöhte Liegestütze','Push','Beginner','Wiederholungen','Brust, Schultern, Trizeps','Hände auf eine stabile, rutschfeste Erhöhung setzen. Körper gerade halten und kontrolliert absenken.','Erhöhung so wählen, dass die Bewegung sauber bleibt.'],
-['pushup','Klassische Liegestütze','Push','Intermediate','Wiederholungen','Brust, Schultern, Trizeps, Rumpf','Hände etwas breiter als schulterbreit aufsetzen. Körper stabil halten, kontrolliert absenken und wieder hochdrücken.','Hüfte nicht durchhängen lassen; Ellbogen kontrollieren.'],
-['pike_push','Pike Push-ups','Push','Advanced','Wiederholungen','Schultern, Trizeps','Hüfte anheben, Oberkörper zwischen den Armen absenken und kontrolliert hochdrücken.','Nur schmerzfreien Bewegungsumfang nutzen.'],
-['scap_push','Scapula Push-ups','Push','Beginner','Wiederholungen','Schulterblattmuskulatur, Rumpf','In hoher Liegestützposition die Schulterblätter kontrolliert zusammen- und auseinander bewegen, Arme bleiben gestreckt.','Nicht aus dem unteren Rücken ausweichen.'],
-['prone_y','Prone Y Raises','Pull','Beginner','Wiederholungen','Oberer Rücken, hintere Schulter','Bauchlage, Arme in Y-Form anheben und langsam absenken.','Kleine kontrollierte Bewegung, Nacken neutral.'],
-['reverse_snow','Reverse Snow Angels','Pull','Beginner','Wiederholungen','Oberer Rücken, hintere Schulter','In Bauchlage Arme kontrolliert seitlich über dem Boden führen.','Schultern nicht zu den Ohren ziehen.'],
-['superman','Superman Hold','Pull','Intermediate','Sekunden','Rückenstrecker, Gesäß','In Bauchlage Arme und Beine leicht anheben und kurz halten.','Nicht maximal ins Hohlkreuz drücken.'],
-['squat','Kniebeugen','Legs','Beginner','Wiederholungen','Oberschenkel, Gesäß','Füße etwa schulterbreit. Hüfte nach hinten und unten bewegen, dann kontrolliert aufrichten.','Knie folgen der Fußrichtung.'],
-['reverse_lunge','Reverse Lunges','Legs','Intermediate','Wiederholungen','Oberschenkel, Gesäß','Einen Schritt nach hinten machen, beide Knie kontrolliert beugen und wieder aufrichten.','Stabil stehen und Bewegung kontrollieren.'],
-['glute_bridge','Glute Bridge','Legs','Beginner','Wiederholungen','Gesäß, hintere Oberschenkel','Rückenlage, Füße aufstellen, Becken anheben und kontrolliert absenken.','Nicht mit Schwung arbeiten.'],
-['calf_raise','Wadenheben','Legs','Beginner','Wiederholungen','Waden','Aufrecht stehen, Fersen anheben, kurz halten und langsam absenken.','Gleichmäßig und ohne Wippen.'],
-['plank','Plank','Core','Beginner','Sekunden','Bauch, Rumpf, Schultern','Unterarme am Boden, Körper in einer geraden Linie halten und ruhig atmen.','Becken weder durchhängen noch zu hoch schieben.'],
-['side_plank','Side Plank','Core','Intermediate','Sekunden','Seitliche Rumpfmuskulatur','Seitlich auf Unterarm stützen, Hüfte anheben und Körper stabil halten.','Schulter stabil über dem Ellbogen.'],
-['dead_bug','Dead Bug','Core','Beginner','Wiederholungen','Tiefe Bauchmuskulatur','Rückenlage, Arme und Beine anheben. Gegengleichen Arm und Fuß langsam absenken, Seiten wechseln.','Lendenbereich kontrolliert am Boden halten.'],
-['bird_dog','Bird Dog','Core','Beginner','Wiederholungen','Rumpf, Rücken, Gesäß','Vierfüßlerstand, gegenüberliegenden Arm und Bein strecken, kurz halten und wechseln.','Becken möglichst ruhig halten.'],
-['hollow','Hollow Hold','Core','Intermediate','Sekunden','Bauch, Rumpf','Rückenlage, Bauch anspannen und Arme/Beine in einer passenden Variante halten.','Nur so tief, wie der Rücken stabil bleibt.'],
-['cat_cow','Cat-Cow','Mobility','Beginner','Wiederholungen','Wirbelsäule, Rumpf','Im Vierfüßlerstand Rücken langsam runden und anschließend sanft strecken.','Ohne Druck oder ruckartige Bewegung.'],
-['wrist','Handgelenk-Mobilisation','Mobility','Beginner','Sekunden','Handgelenke, Unterarme','Handgelenke langsam kreisen und sanft in verschiedene Richtungen bewegen.','Nur angenehme Bewegungsbereiche nutzen.'],
-['tuck_lsit','Tuck L-Sit Hold','Skill','Intermediate','Sekunden','Bauch, Hüftbeuger, Trizeps','Auf stabiler Unterlage Hände neben der Hüfte aufsetzen und Knie in einer kompakten Position kontrolliert anheben.','Nur mit sicherem, stabilem Untergrund und ohne Schmerzen üben.'],
-['lsit','L-Sit Hold','Skill','Advanced','Sekunden','Bauch, Hüftbeuger, Trizeps','Aus gestützter Position Beine nach vorne strecken und die Position kontrolliert halten.','Als langfristiges Ziel betrachten; passende Vorstufen nutzen.'],
-['crow','Crow Pose','Skill','Intermediate','Sekunden','Handgelenke, Schultern, Rumpf','Hände stabil aufsetzen und das Gewicht schrittweise nach vorne verlagern. Nur auf freier, weicher Fläche üben.','Niedrige, kontrollierte Gewichtsverlagerung; nicht springen.'],
-['wall_handstand','Handstand an der Wand','Skill','Advanced','Sekunden','Schultern, Rumpf','Nur mit freier Fläche und sicherer Wand-Unterstützung. Körperspannung in einer passenden Vorstufe üben.','Bei Unsicherheit beaufsichtigen lassen; keine riskanten Versuche.'],
-['pike_hold','Pike Hold','Skill','Beginner','Sekunden','Schultern, Rumpf','Hände am Boden, Hüfte nach oben, Gewicht gleichmäßig verteilen und Position halten.','Schultern nicht erzwingen.'],
-['tuck_hold','Tuck Hold','Skill','Beginner','Sekunden','Rumpf, Schultern','In gestützter Position Knie anheben und kurz kontrolliert halten.','Stabilen Untergrund nutzen.']
-].map(a=>({id:a[0],name:a[1],category:a[2],level:a[3],unit:a[4],muscles:a[5],how:a[6],tip:a[7],custom:false}));
-let db=[...baseExercises],data=null,planDraft=[],session=null,timerId=null,timerLeft=0,timerEnd=0;
-const $=id=>document.getElementById(id),today=()=>new Date().toISOString().slice(0,10);
-function fresh(){return {version:'3.0',profile:{level:0,days:4,time:25,focus:'Ausgewogen'},xp:0,workouts:[],skills:[],records:{},weeklyGoal:4,achievements:[],plans:[],customExercises:[],created:new Date().toISOString()}}
-function migrate(old){let n=fresh();n.xp=Number(old.xp||0);n.profile=old.profile?{...n.profile,...old.profile}:n.profile;n.weeklyGoal=Number(old.weeklyGoal||n.profile.days||4);n.skills=old.skills||old.mastered||[];n.records=old.records||{};n.achievements=old.achievements||[];n.workouts=(old.workouts||[]).map((w,i)=>({id:w.id||'migrated-'+i,date:w.date||today(),minutes:Number(w.minutes||w.duration||0),sets:Number(w.sets||w.completedSets||0),exercises:w.exercises||{},note:w.note||'Übernommen aus älterer Version',xp:Number(w.xp||0),reps:Number(w.reps||0),legacy:!!w.legacy}));return n}
-function load(){try{let raw=localStorage.getItem(STORE);if(raw){data={...fresh(),...JSON.parse(raw)}}else{for(const k of OLD_KEYS){let old=localStorage.getItem(k);if(old){data=migrate(JSON.parse(old));data.migratedFrom=k;localStorage.setItem(STORE,JSON.stringify(data));break}}}if(!data)data=fresh();}catch(e){data=fresh();toast('Lokale Daten konnten nicht vollständig gelesen werden. Bitte Backup prüfen.')}db.push(...(data.customExercises||[]));}
-function save(){data.version='3.0';data.customExercises=db.filter(e=>e.custom);localStorage.setItem(STORE,JSON.stringify(data));refreshAll()}
-function toast(t){let el=$('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600)}
-const tabs=[['home','⌂','Home'],['training','▸','Training'],['plans','▤','Pläne'],['library','▦','Übungen'],['skills','◇','Skills'],['progress','▥','Stats'],['profile','⚙','Profil']];
-function initNav(){for(const [id,ic,label] of tabs){let a=document.createElement('button');a.textContent=label;a.onclick=()=>openTab(id);a.dataset.tab=id;$('topTabs').append(a);let b=document.createElement('button');b.innerHTML='<b>'+ic+'</b>'+label;b.onclick=()=>openTab(id);b.dataset.tab=id;$('bottomNav').append(b)}}
-function openTab(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+id));document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));if(id==='library')renderLibrary();if(id==='plans'){renderPlanPicker();renderPlans()}if(id==='skills')renderSkills();if(id==='progress')renderProgress();if(id==='profile')renderProfile()}
-function rank(){let r=0;while(r<19&&data.xp>=threshold(r+1))r++;return r}
-function weekWorkouts(){let d=new Date();d.setDate(d.getDate()-((d.getDay()+6)%7));d.setHours(0,0,0,0);return data.workouts.filter(w=>new Date(w.date)>=d).length}
-function streak(){let set=new Set(data.workouts.map(w=>w.date));let d=new Date();let count=0;if(!set.has(today()))d.setDate(d.getDate()-1);while(set.has(d.toISOString().slice(0,10))){count++;d.setDate(d.getDate()-1)}return count}
-function refreshAll(){let r=rank(),cur=r?threshold(r):0,next=threshold(r+1),pct=Math.min(100,Math.round((data.xp-cur)/(next-cur)*100));$('homeRank').textContent=rankNames[r];$('homeXp').textContent=data.xp+' XP';$('rankProgress').style.width=pct+'%';$('rankPercent').textContent=pct+'%';$('rankNext').textContent=r===19?'Max Rank erreicht':(next-data.xp)+' XP bis '+rankNames[r+1];$('weekCount').textContent=weekWorkouts()+' / '+data.weeklyGoal;$('weekProgress').style.width=Math.min(100,weekWorkouts()/data.weeklyGoal*100)+'%';$('totalSessions').textContent=data.workouts.length;$('totalMinutes').textContent=data.workouts.reduce((a,w)=>a+(w.minutes||0),0);$('totalSets').textContent=data.workouts.reduce((a,w)=>a+(w.sets||0),0);$('streak').textContent=streak();let last=data.workouts[data.workouts.length-1];('lastWorkout').textContent=last?`${last.date} · ${last.sets||0} Sätze · ${last.minutes||0} Minuten`:'Noch kein Training gespeichert.';$('nextTip').textContent=data.profile?.focus==='Kraft'?'Achte auf kontrollierte Wiederholungen und ausreichende Erholung.':'Bleib bei sauberen Bewegungen und steigere dich schrittweise.'}
-function renderLibrary(){let q=($('libSearch').value||'').toLowerCase(),cat=$('libCategory').value;let list=db.filter(e=>(!cat||e.category===cat)&&(!q||(e.name+' '+e.muscles+' '+e.how).toLowerCase().includes(q)));$('libraryList').innerHTML=list.map(e=>`<div class="exercise"><div class="exercise-icon">${e.category==='Push'?'↗':e.category==='Pull'?'↘':e.category==='Legs'?'⌁':e.category==='Core'?'◈':e.category==='Skill'?'◇':'✧'}</div><div class="exercise-main"><h3>${esc(e.name)}</h3><p>${esc(e.muscles)}</p><div class="chiprow"><span class="chip">${e.category}</span><span class="chip">${e.level}</span><span class="chip">${e.unit}</span></div><div class="actions"><button class="ghost" onclick="exerciseDetail('${e.id}')">Details</button><button class="secondary" onclick="addToDraft('${e.id}')">＋ Zum Plan</button></div></div></div>`).join('')||'<div class="empty">Keine passende Übung gefunden.</div>'}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function exerciseDetail(id){let e=db.find(x=>x.id===id);if(!e)return;modal(`<div class="eyebrow">EXERCISE DETAIL</div><h2>${esc(e.name)}</h2><div class="chiprow"><span class="chip">${e.category}</span><span class="chip">${e.level}</span><span class="chip">${e.unit}</span></div><h3 style="margin-top:18px">Trainierte Muskelgruppen</h3><p class="muted">${esc(e.muscles)}</p><h3 style="margin-top:15px">Ausführung</h3><p>${esc(e.how)}</p><h3 style="margin-top:15px">Technikhinweis</h3><p class="muted">${esc(e.tip)}</p><div class="actions"><button class="primary" onclick="addToDraft('${e.id}');closeModal()">Zum eigenen Plan hinzufügen</button><button class="ghost" onclick="closeModal()">Schließen</button></div>`)}
-function openCustomExercise(){modal(`<div class="eyebrow">CUSTOM EXERCISE</div><h2>Eigene Übung erstellen</h2><label>Name</label><input id="ceName" class="field" placeholder="Name deiner Übung"><label>Kategorie</label><select id="ceCat" class="field"><option>Push</option><option>Pull</option><option>Core</option><option>Legs</option><option>Mobility</option><option>Skill</option></select><label>Schwierigkeit</label><select id="ceLevel" class="field"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><label>Messart</label><select id="ceUnit" class="field"><option>Wiederholungen</option><option>Sekunden</option></select><label>Muskelgruppen</label><input id="ceMuscles" class="field" placeholder="z. B. Bauch, Schultern"><label>Ausführung</label><textarea id="ceHow" class="field" rows="3" placeholder="Beschreibe die Bewegung und sichere Ausführung"></textarea><label>Technikhinweis</label><textarea id="ceTip" class="field" rows="2" placeholder="Worauf sollte man achten?"></textarea><div class="actions"><button class="primary" onclick="saveCustomExercise()">Übung speichern</button><button class="ghost" onclick="closeModal()">Abbrechen</button></div>`)}
-function saveCustomExercise(){let name=$('ceName').value.trim();if(!name||!$('ceHow').value.trim()){toast('Name und Beschreibung fehlen.');return}let e={id:'custom_'+Date.now(),name,category:$('ceCat').value,level:$('ceLevel').value,unit:$('ceUnit').value,muscles:$('ceMuscles').value||'Nicht angegeben',how:$('ceHow').value,tip:$('ceTip').value||'Kontrolliert und schmerzfrei ausführen.',custom:true};db.push(e);data.customExercises.push(e);save();closeModal();renderLibrary();toast('Eigene Übung gespeichert.')}
-function newPlan(){planDraft=[];$('planName').value='';renderPlanPicker();renderDraft();openTab('plans')}
-function renderPlanPicker(){if(!$('planPicker'))return;let q=($('planSearch').value||'').toLowerCase();$('planPicker').innerHTML=db.filter(e=>!q||e.name.toLowerCase().includes(q)).map(e=>`<div class="row small" style="padding:7px 0;border-bottom:1px solid var(--line)"><span>${esc(e.name)} <span class="muted">· ${e.level}</span></span><button class="ghost" onclick="addToDraft('${e.id}')">＋</button></div>`).join('')}
-function addToDraft(id){let e=db.find(x=>x.id===id);if(!e)return;planDraft.push({exerciseId:id,sets:3,target:e.unit==='Sekunden'?20:8,unit:e.unit});renderDraft();$('planCount').textContent=planDraft.length+' Übungen'}
-function renderDraft(){let el=$('planPicker');if(!el)return;let q=($('planSearch').value||'').toLowerCase();let picker=db.filter(e=>!q||e.name.toLowerCase().includes(q));el.innerHTML='<h4 style="margin:12px 0 5px">Bibliothek</h4>'+picker.map(e=>`<div class="row small" style="padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(e.name)} <span class="muted">· ${e.level}</span></span><button class="ghost" onclick="addToDraft('${e.id}')">＋</button></div>`).join('')+'<h4 style="margin:15px 0 5px">Planinhalt</h4>'+planDraft.map((x,i)=>{let e=db.find(z=>z.id===x.exerciseId);return `<div class="listitem"><div class="row"><b>${esc(e?.name||'Übung')}</b><button class="danger" onclick="removeDraft(${i})">×</button></div><div class="two"><label>Sätze<input class="field" type="number" min="1" max="8" value="${x.sets}" onchange="planDraft[${i}].sets=+this.value"></label><label>${x.unit==='Sekunden'?'Sekunden':'Wiederholungen'}<input class="field" type="number" min="1" value="${x.target}" onchange="planDraft[${i}].target=+this.value"></label></div></div>`}).join('');$('planCount').textContent=planDraft.length+' Übungen'}
-function removeDraft(i){planDraft.splice(i,1);renderDraft()}
-function savePlan(){let name=$('planName').value.trim();if(!name||!planDraft.length){toast('Planname und mindestens eine Übung erforderlich.');return}data.plans.push({id:'plan_'+Date.now(),name,items:JSON.parse(JSON.stringify(planDraft))});save();planDraft=[];renderPlans();renderDraft();toast('Trainingsplan gespeichert.')}
-function renderPlans(){$('plansList').innerHTML=data.plans.map(p=>`<div class="listitem"><div class="row"><h3>${esc(p.name)}</h3><span class="pill">${p.items.length} Übungen</span></div><p>${p.items.map(x=>esc(db.find(e=>e.id===x.exerciseId)?.name||'Übung')).join(' · ')}</p><div class="actions"><button class="primary" onclick="startPlan('${p.id}')">Training starten</button><button class="secondary" onclick="editPlan('${p.id}')">Bearbeiten</button><button class="danger" onclick="deletePlan('${p.id}')">Löschen</button></div></div>`).join('')||'<div class="empty">Noch keine eigenen Pläne. Erstelle links deinen ersten Plan.</div>'}
-function editPlan(id){let p=data.plans.find(x=>x.id===id);if(!p)return;planDraft=JSON.parse(JSON.stringify(p.items));$('planName').value=p.name;data.plans=data.plans.filter(x=>x.id!==id);save();renderDraft();toast('Plan zum Bearbeiten geladen. Nach Änderungen erneut speichern.')}
-function deletePlan(id){if(!confirm('Diesen Plan löschen?'))return;data.plans=data.plans.filter(p=>p.id!==id);save();renderPlans()}
-function generateWorkout(){let focus=$('genFocus').value,mins=+$('genMinutes').value;let eligible=db.filter(e=>!e.custom&&(['Ausgewogen',focus].includes(focus)||e.category==='Mobility'));let chosen=[];let cats=focus==='Kraft'?['Push','Legs','Pull','Core']:focus==='Stabilität'?['Core','Legs','Pull']:focus==='Beweglichkeit'?['Mobility','Core']:focus==='Körperkontrolle'?['Skill','Core','Mobility']:['Push','Legs','Core','Pull'];cats.forEach(c=>{let pool=eligible.filter(e=>e.category===c&&e.level!=='Advanced'&&!chosen.includes(e));if(pool.length)chosen.push(pool[Math.floor(Math.random()*pool.length)])});chosen=chosen.slice(0,mins===15?3:mins===25?4:5);startSession(chosen.map(e=>({exerciseId:e.id,sets:2,target:e.unit==='Sekunden'?20:8,unit:e.unit})),mins,'Automatischer Generator')}
-function startPlan(id){let p=data.plans.find(x=>x.id===id);if(p)startSession(p.items,p.items.length*6,p.name)}
-function startSession(items,mins,source){session={items:JSON.parse(JSON.stringify(items)),minutes:mins,source,done:{}};$('sessionSource').textContent=source;$('sessionArea').innerHTML=`<div class="eyebrow">ACTIVE SESSION</div><h2>${esc(source)}</h2>`+session.items.map((x,i)=>{let e=db.find(z=>z.id===x.exerciseId);return `<div class="listitem"><div class="row"><h3>${esc(e?.name||'Übung')}</h3><span class="pill">${e?.level||''}</span></div><p>${esc(e?.muscles||'')}</p><div class="row small"><span>${x.sets} Sätze · ${x.target} ${x.unit}</span><button class="ghost" onclick="replaceExercise(${i})">Austauschen</button></div>${Array.from({length:x.sets},(_,j)=>`<label style="display:block;margin-top:8px"><input type="checkbox" onchange="markSet(${i},${j},this.checked)"> Satz ${j+1} abgeschlossen</label>`).join('')}</div>`}).join('')+`<div class="card"><div class="eyebrow">REST TIMER</div><div class="timer" id="timerDisplay">01:00</div><div class="three"><button class="secondary" onclick="setTimer(30)">30s</button><button class="secondary" onclick="setTimer(60)">60s</button><button class="secondary" onclick="setTimer(90)">90s</button></div><div class="actions"><button class="primary" onclick="toggleTimer()">Start / Pause</button><button class="ghost" onclick="setTimer(timerLeft||60)">Reset</button></div></div><button class="primary" style="width:100%;margin-top:12px" onclick="finishSession()">Training abschließen</button>`;openTab('training')}
-function markSet(i,j,v){session.done[i+'-'+j]=v}
-function replaceExercise(i){let old=db.find(e=>e.id===session.items[i].exerciseId);let candidates=db.filter(e=>e.id!==old?.id&&e.category===old?.category&&e.level===old?.level);if(!candidates.length)candidates=db.filter(e=>e.id!==old?.id&&e.category===old?.category);if(!candidates.length){toast('Keine passende Alternative gefunden.');return}let e=candidates[Math.floor(Math.random()*candidates.length)];session.items[i].exerciseId=e.id;session.items[i].unit=e.unit;session.items[i].target=e.unit==='Sekunden'?20:8;startSession(session.items,session.minutes,session.source);toast('Übung ersetzt: '+e.name)}
-function finishSession(){let sets=Object.values(session.done).filter(Boolean).length;if(!sets){toast('Markiere mindestens einen abgeschlossenen Satz.');return}let xp=sets*10+20;let was=rank();data.workouts.push({id:'os_'+Date.now(),date:today(),minutes:session.minutes,sets,exercises:session.items.map(x=>db.find(e=>e.id===x.exerciseId)?.name),xp});data.xp+=xp;let now=rank();save();session=null;stopTimer();$('sessionArea').innerHTML=`<div class="card rankpop doneflash"><div class="eyebrow">SESSION COMPLETE</div><div class="title">+${xp} XP</div><p class="muted">${sets} Sätze gespeichert. Gute Arbeit – achte auch auf Erholung.</p><button class="primary" onclick="openTab('home')">Zur Übersicht</button></div>`;if(now>was)modal(`<div class="rankpop" style="text-align:center;padding:20px"><div style="font-size:46px">🏆</div><div class="eyebrow">RANK UP</div><h1>${rankNames[now]}</h1><p class="muted">Du hast einen neuen Rang erreicht.</p><button class="primary" onclick="closeModal()">Weiter</button></div>`);checkAchievements()}
-function setTimer(s){stopTimer();timerLeft=s;updateTimerDisplay()}
-function updateTimerDisplay(){let el=$('timerDisplay');if(el)el.textContent=String(Math.floor(timerLeft/60)).padStart(2,'0')+':'+String(timerLeft%60).padStart(2,'0')}
-function toggleTimer(){if(timerId){clearInterval(timerId);timerId=null;return}if(!timerLeft)timerLeft=60;timerId=setInterval(()=>{timerLeft--;updateTimerDisplay();if(timerLeft<=0){stopTimer();let el=$('timerDisplay');if(el){el.parentElement.classList.add('doneflash')}beep();if(navigator.vibrate)navigator.vibrate([150,100,150]);toast('Timer beendet!');}},1000)}
-function stopTimer(){if(timerId)clearInterval(timerId);timerId=null}
-function beep(){try{let C=window.AudioContext||window.webkitAudioContext;if(!C)return;let c=new C(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.12;o.start();o.stop(c.currentTime+.22)}catch(e){}}
-const skills=[['Tuck Hold','Core & Körperspannung','Beginner','tuck_hold',0],['Pike Hold','Schulterkontrolle','Beginner','pike_hold',0],['Tuck L-Sit','Vorstufe zum L-Sit','Intermediate','tuck_lsit',1],['Crow Pose','Balance und Kontrolle','Intermediate','crow',1],['L-Sit','Kraft und Körperspannung','Advanced','lsit',2],['Wall Handstand','Schulterkontrolle und Balance','Advanced','wall_handstand',2],['Hollow Hold','Rumpfspannung','Intermediate','hollow',1]];
-function renderSkills(){$('skillList').innerHTML=skills.map((s,i)=>{let done=data.skills.includes(s[0]);return `<div class="card span-4"><div class="row"><span class="pill">${s[2]}</span><span>${done?'✓':'◇'}</span></div><h3 style="margin:14px 0 5px">${s[0]}</h3><p class="muted small">${s[1]}</p><div class="skillbar"><i style="width:${done?100:Math.max(5,20-i*3)}%"></i></div><div class="actions"><button class="${done?'secondary':'primary'}" onclick="toggleSkill('${s[0]}')">${done?'Erledigt ✓':'Als erreicht markieren'}</button></div></div>`}).join('')}
-function toggleSkill(name){if(data.skills.includes(name))data.skills=data.skills.filter(x=>x!==name);else data.skills.push(name);save();renderSkills();toast('Skill-Fortschritt aktualisiert.')}
-function checkAchievements(){let a=[['first','Erstes Training',data.workouts.length>=1],['five','Fünf Trainings',data.workouts.length>=5],['ten','Zehn Trainings',data.workouts.length>=10],['skill','Erster Skill',data.skills.length>=1],['plan','Erster eigener Plan',data.plans.length>=1]];a.forEach(x=>{if(x[2]&&!data.achievements.includes(x[0])){data.achievements.push(x[0]);toast('Achievement freigeschaltet: '+x[1])}});save()}
-function renderProgress(){let reps=data.workouts.reduce((a,w)=>a+(w.reps||0),0);$('statSessions').textContent=data.workouts.length;$('statReps').textContent=reps;$('statXP').textContent=data.xp;let bars=[];for(let i=7;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i*7);let start=new Date(d);start.setDate(start.getDate()-6);let c=data.workouts.filter(w=>new Date(w.date)>=start&&new Date(w.date)<=d).length;bars.push(c)}$('weeklyBars').innerHTML=bars.map(v=>`<i style="height:${Math.max(4,v*18)}px" title="${v} Trainings"></i>`).join('');let days=[];for(let i=83;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);let ds=d.toISOString().slice(0,10),c=data.workouts.filter(w=>w.date===ds).length;days.push(`<i class="${c>=3?'l3':c===2?'l2':c===1?'l1':''}" title="${ds}: ${c} Training(s)"></i>`)}$('heatmap').innerHTML=days.join('');$('recordsList').innerHTML=`<div class="listitem">Längste Trainingsserie: <b>${streak()} Tage</b></div><div class="listitem">Gesamte Trainingszeit: <b>${data.workouts.reduce((a,w)=>a+(w.minutes||0),0)} Minuten</b></div><div class="listitem">Meiste Sätze in einer Einheit: <b>${Math.max(0,...data.workouts.map(w=>w.sets||0))}</b></div>`}
-function renderProfile(){$('profileLevel').value=data.profile.level||0;$('weeklyGoalInput').value=data.weeklyGoal;$('profileFocus').value=data.profile.focus||'Ausgewogen';$('migrationInfo').textContent=data.migratedFrom?'Datenübernahme erkannt: '+data.migratedFrom+'. Alte Speicherdaten wurden nicht gelöscht.':'Daten werden lokal auf diesem Gerät gespeichert.';$('achievementList').innerHTML=[['first','Erstes Training'],['five','Fünf Trainings'],['ten','Zehn Trainings'],['skill','Erster Skill'],['plan','Erster eigener Plan']].map(a=>`<div class="listitem">${data.achievements.includes(a[0])?'🏅':'🔒'} ${a[1]}</div>`).join('')}
-function saveProfile(){data.profile.level=+$('profileLevel').value;data.profile.focus=$('profileFocus').value;data.weeklyGoal=+$('weeklyGoalInput').value;save();toast('Profil gespeichert.')}
-function exportBackup(){let blob=new Blob([JSON.stringify({app:'ATHLETIC OS',version:'3.0',data},null,2)],{type:'application/json'}),a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download='athletic-os-3-backup.json';a.click();URL.revokeObjectURL(u)}
-function importBackup(ev){let f=ev.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let p=JSON.parse(r.result).data;if(!p||!Array.isArray(p.workouts))throw 0;if(confirm('Aktuelle lokale Daten durch dieses Backup ersetzen?')){data={...fresh(),...p};db=[...baseExercises,...(data.customExercises||[])];save();location.reload()}}catch(e){toast('Backup ungültig.')}ev.target.value=''};r.readAsText(f)}
-function modal(content){$('modalContent').innerHTML=content;$('modal').classList.add('show')}function closeModal(){$('modal').classList.remove('show')}
-$('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal()});
-load();initNav();refreshAll();renderLibrary();renderPlans();renderSkills();renderProgress();renderProfile();
-if(!data.profile)toast('Willkommen bei ATHLETIC OS 3.0');
+/* ==========================================
+   ATHLETIC OS 3.1
+   TEIL 2: DATEN, DASHBOARD UND TRAINING
+========================================== */
+
+/* ---------- GRUNDLEGENDE HILFSFUNKTIONEN ---------- */
+
+const $ = id => document.getElementById(id);
+
+const STORE = 'athletic_os_v3';
+const OLD_KEYS = ['athletic_os_v2','calisthenics_app','athletic_os'];
+
+function esc(value){
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  })[char]);
+}
+
+function todayKey(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function dateKey(date){
+  const d = new Date(date);
+  if(isNaN(d)) return '';
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function formatDate(date){
+  if(!date) return 'Unbekanntes Datum';
+  return new Date(date).toLocaleDateString('de-DE',{
+    day:'2-digit',
+    month:'2-digit',
+    year:'numeric'
+  });
+}
+
+function number(value){
+  return Math.max(0,Number(value)||0);
+}
+
+function toast(message){
+  const el = $('toast');
+  if(!el) return;
+  el.textContent = message;
+  el.classList.add('show');
+  clearTimeout(toast.timeout);
+  toast.timeout = setTimeout(()=>el.classList.remove('show'),2600);
+}
+
+/* ---------- RÄNGE UND XP ---------- */
+
+const rankNames = [
+  {name:'Rookie',xp:0},
+  {name:'Beginner',xp:150},
+  {name:'Athlete',xp:400},
+  {name:'Advanced',xp:800},
+  {name:'Elite',xp:1400},
+  {name:'Master',xp:2200},
+  {name:'Legend',xp:3500},
+  {name:'Apex',xp:5500}
+];
+
+function rank(xp){
+  let current = rankNames[0];
+  let next = null;
+
+  for(let i=0;i<rankNames.length;i++){
+    if(xp >= rankNames[i].xp){
+      current = rankNames[i];
+      next = rankNames[i+1] || null;
+    }
+  }
+
+  return {current,next};
+}
+
+/* ---------- ÜBUNGSDATENBANK ---------- */
+
+const baseExercises = [
+  {
+    id:'wall_push',
+    name:'Wall Push-ups',
+    category:'Brust',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Brust, Schulter, Trizeps',
+    how:'Stelle dich vor eine Wand. Setze die Hände etwa schulterbreit auf und beuge die Arme kontrolliert.',
+    tip:'Halte deinen Körper gerade und bewege dich kontrolliert.',
+    steps:[
+      'Stelle dich mit etwas Abstand vor eine stabile Wand.',
+      'Setze die Hände ungefähr schulterbreit auf.',
+      'Beuge die Arme und bewege den Oberkörper zur Wand.',
+      'Drücke dich kontrolliert zurück.'
+    ],
+    mistakes:['Hohlkreuz bilden','Schultern hochziehen','Die Bewegung zu schnell ausführen'],
+    prerequisites:[],
+    regression:'Mit den Füßen näher an der Wand stehen.',
+    progression:'Incline Push-ups'
+  },
+  {
+    id:'incline_push',
+    name:'Incline Push-ups',
+    category:'Brust',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Brust, Schulter, Trizeps',
+    how:'Stütze deine Hände auf einer stabilen erhöhten Fläche ab und führe Liegestütze aus.',
+    tip:'Je niedriger die Erhöhung, desto anspruchsvoller wird die Übung.',
+    steps:[
+      'Wähle eine stabile, rutschfeste Erhöhung.',
+      'Setze die Hände etwas breiter als schulterbreit auf.',
+      'Halte Kopf, Rücken und Beine möglichst in einer Linie.',
+      'Senke die Brust kontrolliert zur Erhöhung.',
+      'Drücke dich wieder nach oben.'
+    ],
+    mistakes:['Hüfte hängen lassen','Ellbogen stark nach außen spreizen','Nur den Kopf bewegen'],
+    prerequisites:['wall_push'],
+    regression:'Wall Push-ups',
+    progression:'Push-ups'
+  },
+  {
+    id:'pushup',
+    name:'Push-ups',
+    category:'Brust',
+    level:'Mittel',
+    unit:'Wiederholungen',
+    muscles:'Brust, Trizeps, Schulter, Core',
+    how:'Stütze dich auf Händen und Füßen ab. Senke deinen Körper kontrolliert ab und drücke dich wieder hoch.',
+    tip:'Spanne Bauch und Gesäß an und halte deinen Körper stabil.',
+    steps:[
+      'Hände etwas breiter als schulterbreit aufsetzen.',
+      'Beine strecken und den Körper stabil halten.',
+      'Ellbogen kontrolliert beugen.',
+      'Brust in Richtung Boden bewegen.',
+      'Dich wieder nach oben drücken.'
+    ],
+    mistakes:['Hüfte hängt durch','Hohlkreuz','Ellbogen extrem weit außen','Halbe Wiederholungen'],
+    prerequisites:['incline_push'],
+    regression:'Incline Push-ups',
+    progression:'Pike Push-ups'
+  },
+  {
+    id:'pike_push',
+    name:'Pike Push-ups',
+    category:'Schulter',
+    level:'Schwer',
+    unit:'Wiederholungen',
+    muscles:'Schulter, Trizeps, Core',
+    how:'Nimm eine umgedrehte V-Position ein und beuge die Arme, sodass sich der Kopf kontrolliert Richtung Boden bewegt.',
+    tip:'Beginne mit einer kleinen Bewegungsamplitude.',
+    steps:[
+      'Hände schulterbreit aufsetzen.',
+      'Hüfte nach oben bewegen.',
+      'Kopf zwischen den Armen in Richtung Boden senken.',
+      'Kontrolliert zurückdrücken.'
+    ],
+    mistakes:['Zu stark ins Hohlkreuz gehen','Unkontrolliert absenken'],
+    prerequisites:['pushup'],
+    regression:'Incline Pike Push-ups',
+    progression:'Erhöhte Pike Push-ups'
+  },
+  {
+    id:'scap_push',
+    name:'Scapula Push-ups',
+    category:'Schulter',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Schulterblattmuskulatur, Serratus',
+    how:'Halte die Arme gestreckt und bewege nur deine Schulterblätter kontrolliert auseinander und zusammen.',
+    tip:'Die Ellbogen bleiben während der gesamten Bewegung gestreckt.',
+    steps:[
+      'Gehe in eine stabile Liegestützposition.',
+      'Lasse den Brustkorb leicht zwischen den Schultern sinken.',
+      'Drücke den Boden weg und schiebe die Schulterblätter auseinander.',
+      'Wiederhole die Bewegung kontrolliert.'
+    ],
+    mistakes:['Ellbogen beugen','Kopf nach vorne schieben'],
+    prerequisites:[],
+    regression:'Auf den Knien ausführen.',
+    progression:'Langsame Scapula Push-ups'
+  },
+  {
+    id:'prone_y',
+    name:'Prone Y Raises',
+    category:'Rücken',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Oberer Rücken, hintere Schulter',
+    how:'Lege dich auf den Bauch und hebe die Arme in einer Y-Form leicht vom Boden ab.',
+    tip:'Arbeite langsam und ohne Schwung.',
+    steps:[
+      'Lege dich auf den Bauch.',
+      'Strecke die Arme schräg nach vorne in Y-Form.',
+      'Hebe die Arme leicht an.',
+      'Halte kurz und senke kontrolliert.'
+    ],
+    mistakes:['Zu stark ins Hohlkreuz gehen','Mit Schwung arbeiten'],
+    prerequisites:[],
+    regression:'Arme einzeln heben.',
+    progression:'Längere Haltephase'
+  },
+  {
+    id:'reverse_snow',
+    name:'Reverse Snow Angels',
+    category:'Rücken',
+    level:'Mittel',
+    unit:'Wiederholungen',
+    muscles:'Oberer Rücken, hintere Schulter',
+    how:'Lege dich auf den Bauch und führe die gestreckten Arme kontrolliert seitlich am Körper entlang.',
+    tip:'Halte den Oberkörper ruhig.',
+    steps:[
+      'Lege dich auf den Bauch.',
+      'Hebe die Arme leicht vom Boden.',
+      'Führe sie langsam von vorne nach hinten.',
+      'Kehre kontrolliert zur Startposition zurück.'
+    ],
+    mistakes:['Arme auf dem Boden schleifen lassen','Schwung verwenden'],
+    prerequisites:[],
+    regression:'Bewegungsradius verkleinern.',
+    progression:'Langsamere Wiederholungen'
+  },
+  {
+    id:'superman',
+    name:'Superman Hold',
+    category:'Rücken',
+    level:'Einfach',
+    unit:'Sekunden',
+    muscles:'Rückenstrecker, Gesäß',
+    how:'Lege dich auf den Bauch und hebe Arme und Beine leicht an.',
+    tip:'Eine kleine, kontrollierte Bewegung reicht aus.',
+    steps:[
+      'Lege dich auf den Bauch.',
+      'Strecke Arme und Beine aus.',
+      'Hebe sie leicht vom Boden.',
+      'Halte die Position und atme ruhig.'
+    ],
+    mistakes:['Zu stark überstrecken','Luft anhalten'],
+    prerequisites:[],
+    regression:'Nur Arme oder Beine anheben.',
+    progression:'Superman Reps'
+  },
+  {
+    id:'squat',
+    name:'Bodyweight Squats',
+    category:'Beine',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Oberschenkel, Gesäß',
+    how:'Stelle die Füße ungefähr schulterbreit auf und beuge Hüfte und Knie kontrolliert.',
+    tip:'Die Knie bewegen sich in Richtung der Fußspitzen.',
+    steps:[
+      'Stelle die Füße etwa schulterbreit auf.',
+      'Schiebe die Hüfte nach hinten.',
+      'Beuge die Knie kontrolliert.',
+      'Drücke dich über den ganzen Fuß wieder hoch.'
+    ],
+    mistakes:['Fersen heben ab','Knie fallen nach innen','Rücken stark runden'],
+    prerequisites:[],
+    regression:'Halbe Squats',
+    progression:'Tempo Squats'
+  },
+  {
+    id:'reverse_lunge',
+    name:'Reverse Lunges',
+    category:'Beine',
+    level:'Mittel',
+    unit:'Wiederholungen',
+    muscles:'Oberschenkel, Gesäß',
+    how:'Mache einen Schritt nach hinten und senke das hintere Knie kontrolliert Richtung Boden.',
+    tip:'Halte den Oberkörper möglichst aufrecht.',
+    steps:[
+      'Stehe aufrecht.',
+      'Mache einen kontrollierten Schritt nach hinten.',
+      'Beuge beide Knie.',
+      'Drücke dich zurück in den Stand.',
+      'Wechsle die Seite.'
+    ],
+    mistakes:['Zu schmale Schrittstellung','Vorderes Knie kippt nach innen'],
+    prerequisites:['squat'],
+    regression:'Kleinere Schritte',
+    progression:'Langsame Reverse Lunges'
+  },
+  {
+    id:'glute_bridge',
+    name:'Glute Bridge',
+    category:'Beine',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Gesäß, hintere Oberschenkel',
+    how:'Lege dich auf den Rücken, stelle die Füße auf und hebe das Becken kontrolliert an.',
+    tip:'Spanne oben das Gesäß an, ohne den Rücken zu überstrecken.',
+    steps:[
+      'Lege dich auf den Rücken.',
+      'Stelle die Füße hüftbreit auf.',
+      'Hebe das Becken an.',
+      'Halte kurz und senke kontrolliert.'
+    ],
+    mistakes:['Hohlkreuz am oberen Punkt','Füße zu weit entfernt'],
+    prerequisites:[],
+    regression:'Kleinere Bewegungsamplitude',
+    progression:'Single Leg Glute Bridge'
+  },
+  {
+    id:'calf_raise',
+    name:'Calf Raises',
+    category:'Beine',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Waden',
+    how:'Drücke dich über die Fußballen nach oben und senke die Fersen langsam ab.',
+    tip:'Nutze eine kontrollierte Bewegung.',
+    steps:[
+      'Stehe stabil auf beiden Füßen.',
+      'Hebe die Fersen an.',
+      'Halte kurz oben.',
+      'Senke die Fersen langsam ab.'
+    ],
+    mistakes:['Mit Schwung arbeiten','Bewegung zu kurz ausführen'],
+    prerequisites:[],
+    regression:'Mit Unterstützung festhalten.',
+    progression:'Einbeinige Calf Raises'
+  },
+  {
+    id:'plank',
+    name:'Plank',
+    category:'Core',
+    level:'Einfach',
+    unit:'Sekunden',
+    muscles:'Bauch, Core, Schulter',
+    how:'Stütze dich auf Unterarmen und Füßen ab und halte deinen Körper in einer stabilen Linie.',
+    tip:'Spanne Bauch und Gesäß an und atme weiter.',
+    steps:[
+      'Unterarme auf den Boden setzen.',
+      'Beine nach hinten strecken.',
+      'Körper stabil ausrichten.',
+      'Position kontrolliert halten.'
+    ],
+    mistakes:['Hüfte hängt durch','Gesäß zu hoch','Luft anhalten'],
+    prerequisites:[],
+    regression:'Knie-Plank',
+    progression:'Long Lever Plank'
+  },
+  {
+    id:'side_plank',
+    name:'Side Plank',
+    category:'Core',
+    level:'Mittel',
+    unit:'Sekunden',
+    muscles:'Seitliche Bauchmuskulatur',
+    how:'Stütze dich seitlich auf einem Unterarm ab und halte die Hüfte angehoben.',
+    tip:'Halte Schulter, Hüfte und Füße möglichst in einer Linie.',
+    steps:[
+      'Lege dich auf die Seite.',
+      'Stütze dich auf dem Unterarm ab.',
+      'Hebe die Hüfte an.',
+      'Halte die Position stabil.'
+    ],
+    mistakes:['Hüfte sinkt ab','Schulter wird hochgezogen'],
+    prerequisites:['plank'],
+    regression:'Side Plank auf den Knien',
+    progression:'Long Lever Side Plank'
+  },
+  {
+    id:'dead_bug',
+    name:'Dead Bug',
+    category:'Core',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Bauch, tiefer Core',
+    how:'Lege dich auf den Rücken und bewege diagonal Arm und Bein langsam voneinander weg.',
+    tip:'Halte den unteren Rücken möglichst stabil am Boden.',
+    steps:[
+      'Lege dich auf den Rücken.',
+      'Hebe Arme und Beine an.',
+      'Strecke einen Arm und das gegenüberliegende Bein.',
+      'Kehre zurück und wechsle die Seite.'
+    ],
+    mistakes:['Rücken hebt stark ab','Bewegung zu schnell'],
+    prerequisites:[],
+    regression:'Nur die Beine bewegen.',
+    progression:'Längere Hebel'
+  },
+  {
+    id:'bird_dog',
+    name:'Bird Dog',
+    category:'Core',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Core, Rücken, Gesäß',
+    how:'Gehe in den Vierfüßlerstand und strecke diagonal einen Arm und das gegenüberliegende Bein.',
+    tip:'Vermeide eine Drehung des Beckens.',
+    steps:[
+      'Gehe in den Vierfüßlerstand.',
+      'Strecke einen Arm nach vorne.',
+      'Strecke gleichzeitig das gegenüberliegende Bein.',
+      'Kehre zurück und wechsle die Seite.'
+    ],
+    mistakes:['Becken dreht sich','Rücken wird überstreckt'],
+    prerequisites:[],
+    regression:'Nur einen Arm oder ein Bein bewegen.',
+    progression:'Bird Dog mit Pause'
+  },
+  {
+    id:'hollow',
+    name:'Hollow Body Hold',
+    category:'Core',
+    level:'Mittel',
+    unit:'Sekunden',
+    muscles:'Bauch, Core',
+    how:'Lege dich auf den Rücken, hebe Arme und Beine leicht an und halte den Rumpf stabil.',
+    tip:'Wähle eine Variante, bei der dein Rücken kontrolliert am Boden bleibt.',
+    steps:[
+      'Lege dich auf den Rücken.',
+      'Spanne den Bauch an.',
+      'Hebe Schultern und Beine leicht an.',
+      'Halte die Position bei kontrollierter Atmung.'
+    ],
+    mistakes:['Unterer Rücken hebt ab','Zu schwierige Variante erzwingen'],
+    prerequisites:['plank'],
+    regression:'Tuck Hollow Hold',
+    progression:'Extended Hollow Hold'
+  },
+  {
+    id:'cat_cow',
+    name:'Cat-Cow',
+    category:'Mobility',
+    level:'Einfach',
+    unit:'Wiederholungen',
+    muscles:'Wirbelsäule, Rumpf',
+    how:'Wechsle im Vierfüßlerstand langsam zwischen Rundrücken und sanfter Streckung.',
+    tip:'Bewege dich ruhig und schmerzfrei.',
+    steps:[
+      'Gehe in den Vierfüßlerstand.',
+      'Runde den Rücken langsam.',
+      'Kehre in eine neutrale Position zurück.',
+      'Bewege den Rücken sanft in die Gegenrichtung.'
+    ],
+    mistakes:['Zu schnell bewegen','Bewegung erzwingen'],
+    prerequisites:[],
+    regression:'Kleinere Bewegungen',
+    progression:'Langsame Atemzüge pro Wiederholung'
+  },
+  {
+    id:'wrist',
+    name:'Wrist Mobility',
+    category:'Mobility',
+    level:'Einfach',
+    unit:'Sekunden',
+    muscles:'Handgelenke, Unterarme',
+    how:'Bewege die Handgelenke langsam durch einen angenehmen Bewegungsbereich.',
+    tip:'Nicht in Schmerzen hineindehnen.',
+    steps:[
+      'Strecke die Arme locker aus.',
+      'Bewege die Handgelenke langsam.',
+      'Führe kleine kontrollierte Kreise aus.'
+    ],
+    mistakes:['Zu viel Druck aufbauen','In Schmerzen hineingehen'],
+    prerequisites:[],
+    regression:'Kleinere Bewegungen',
+    progression:'Sanfte Belastung im Vierfüßlerstand'
+  },
+  {
+    id:'tuck_lsit',
+    name:'Tuck L-Sit',
+    category:'Skills',
+    level:'Mittel',
+    unit:'Sekunden',
+    muscles:'Core, Trizeps, Schulter',
+    how:'Stütze dich mit den Händen ab und hebe die angewinkelten Beine vom Boden.',
+    tip:'Beginne mit kurzen, kontrollierten Haltezeiten.',
+    steps:[
+      'Setze die Hände neben die Hüfte.',
+      'Drücke dich aktiv aus den Schultern heraus.',
+      'Hebe die angewinkelten Beine an.',
+      'Halte die Position kontrolliert.'
+    ],
+    mistakes:['Schultern einsinken lassen','Mit Schwung hochspringen'],
+    prerequisites:['plank'],
+    regression:'Ein Bein abwechselnd anheben',
+    progression:'L-Sit'
+  },
+  {
+    id:'lsit',
+    name:'L-Sit',
+    category:'Skills',
+    level:'Schwer',
+    unit:'Sekunden',
+    muscles:'Core, Trizeps, Hüftbeuger',
+    how:'Stütze dich auf den Händen ab und halte die gestreckten Beine vor dem Körper angehoben.',
+    tip:'Baue die Haltezeit schrittweise auf.',
+    steps:[
+      'Setze die Hände neben der Hüfte auf.',
+      'Drücke dich aktiv nach oben.',
+      'Strecke die Beine nach vorne.',
+      'Halte die Position stabil.'
+    ],
+    mistakes:['Schultern hochziehen','Beine unkontrolliert absenken'],
+    prerequisites:['tuck_lsit'],
+    regression:'Tuck L-Sit',
+    progression:'Längere Haltezeit'
+  },
+  {
+    id:'crow',
+    name:'Crow Pose',
+    category:'Skills',
+    level:'Mittel',
+    unit:'Sekunden',
+    muscles:'Schulter, Core, Handgelenke',
+    how:'Platziere die Knie an den Oberarmen und verlagere dein Gewicht vorsichtig nach vorne.',
+    tip:'Übe auf einer weichen, freien Fläche und steigere dich langsam.',
+    steps:[
+      'Gehe in eine tiefe Hocke.',
+      'Setze die Hände stabil auf.',
+      'Platziere die Knie an den Oberarmen.',
+      'Verlagere das Gewicht vorsichtig nach vorne.'
+    ],
+    mistakes:['Zu schnell nach vorne kippen','Hände instabil aufsetzen'],
+    prerequisites:['plank'],
+    regression:'Gewichtsverlagerung ohne Abheben der Füße',
+    progression:'Längere Haltezeit'
+  },
+  {
+    id:'wall_handstand',
+    name:'Wall Handstand',
+    category:'Skills',
+    level:'Schwer',
+    unit:'Sekunden',
+    muscles:'Schulter, Core, Arme',
+    how:'Übe einen stabilen Handstand an einer geeigneten freien Wandfläche.',
+    tip:'Nur mit sicherer Umgebung und kontrolliertem Einstieg üben.',
+    steps:[
+      'Wähle eine freie, sichere Wandfläche.',
+      'Bereite Handgelenke und Schultern vor.',
+      'Übe zunächst eine geeignete Vorstufe.',
+      'Halte die Position nur so lange, wie du sie kontrollieren kannst.'
+    ],
+    mistakes:['Unkontrollierter Einstieg','Hohlkreuz','Zu lange ohne Kontrolle halten'],
+    prerequisites:['pike_push'],
+    regression:'Pike Hold',
+    progression:'Freier Handstand'
+  },
+  {
+    id:'pike_hold',
+    name:'Pike Hold',
+    category:'Skills',
+    level:'Mittel',
+    unit:'Sekunden',
+    muscles:'Schulter, Core',
+    how:'Stütze dich mit den Händen ab und bringe die Hüfte in eine umgedrehte V-Position.',
+    tip:'Verteile das Gewicht kontrolliert auf beide Hände.',
+    steps:[
+      'Hände stabil aufsetzen.',
+      'Hüfte nach oben bewegen.',
+      'Arme aktiv strecken.',
+      'Position kontrolliert halten.'
+    ],
+    mistakes:['Schultern einsinken lassen','Hände zu weit auseinander'],
+    prerequisites:['plank'],
+    regression:'Pike mit kürzerer Haltezeit',
+    progression:'Erhöhte Pike Position'
+  },
+  {
+    id:'tuck_hold',
+    name:'Tuck Hold',
+    category:'Skills',
+    level:'Mittel',
+    unit:'Sekunden',
+    muscles:'Core, Schulter, Trizeps',
+    how:'Stütze dich mit den Händen ab und halte die Knie angewinkelt vor dem Körper.',
+    tip:'Arbeite mit stabiler Schulterposition.',
+    steps:[
+      'Setze die Hände stabil auf.',
+      'Drücke dich aus den Schultern heraus.',
+      'Ziehe die Knie kontrolliert an.',
+      'Halte die Position.'
+    ],
+    mistakes:['Schultern einsinken lassen','Mit Schwung arbeiten'],
+    prerequisites:['plank'],
+    regression:'Ein Bein einzeln anheben',
+    progression:'Tuck L-Sit'
+  }
+].map(e=>({
+  ...e,
+  custom:false,
+  steps:e.steps||[],
+  mistakes:e.mistakes||[],
+  prerequisites:e.prerequisites||[],
+  regression:e.regression||'Leichtere Variante wählen',
+  progression:e.progression||'Schwierigere Variante wählen'
+}));
+
+/* ---------- DATENBANK UND MIGRATION ---------- */
+
+function fresh(){
+  return {
+    version:'3.1',
+    profile:{name:'',focus:'Ganzkörper'},
+    xp:0,
+    workouts:[],
+    skills:{},
+    records:{},
+    weeklyGoal:3,
+    achievements:[],
+    plans:[],
+    customExercises:[],
+    created:Date.now()
+  };
+}
+
+function migrate(old){
+  const d=fresh();
+  if(!old || typeof old!=='object') return d;
+
+  d.profile={...d.profile,...(old.profile||{})};
+  d.xp=number(old.xp);
+  d.skills=old.skills||{};
+  d.records=old.records||{};
+  d.weeklyGoal=number(old.weeklyGoal)||3;
+  d.achievements=Array.isArray(old.achievements)?old.achievements:[];
+  d.plans=Array.isArray(old.plans)?old.plans:[];
+  d.customExercises=Array.isArray(old.customExercises)?old.customExercises:[];
+
+  d.workouts=(Array.isArray(old.workouts)?old.workouts:[]).map(w=>({
+    id:w.id||('old_'+Math.random().toString(36).slice(2)),
+    date:w.date||w.created||new Date().toISOString(),
+    minutes:number(w.minutes),
+    sets:number(w.sets),
+    exercises:Array.isArray(w.exercises)?w.exercises:[],
+    xp:number(w.xp),
+    reps:number(w.reps),
+    seconds:number(w.seconds),
+    results:Array.isArray(w.results)?w.results:[],
+    legacy:!!w.legacy
+  }));
+
+  return d;
+}
+
+function load(){
+  try{
+    const raw=localStorage.getItem(STORE);
+    if(raw){
+      const parsed=JSON.parse(raw);
+      return migrate(parsed);
+    }
+
+    for(const key of OLD_KEYS){
+      const previous=localStorage.getItem(key);
+      if(previous){
+        const migrated=migrate(JSON.parse(previous));
+        localStorage.setItem(STORE,JSON.stringify(migrated));
+        return migrated;
+      }
+    }
+  }catch(error){
+    console.error('Ladefehler:',error);
+  }
+
+  return fresh();
+}
+
+let data=load();
+
+let db=[
+  ...baseExercises,
+  ...(Array.isArray(data.customExercises)?data.customExercises:[])
+];
+
+/* ---------- SPEICHERN ---------- */
+
+function save(){
+  data.version='3.1';
+  data.customExercises=db.filter(e=>e.custom);
+  try{
+    localStorage.setItem(STORE,JSON.stringify(data));
+  }catch(error){
+    console.error(error);
+    toast('Speichern fehlgeschlagen. Speicher möglicherweise voll.');
+  }
+  refreshAll();
+}
+
+/* ---------- NAVIGATION ---------- */
+
+function openTab(tab){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+
+  const view=$(tab);
+  if(view) view.classList.add('active');
+
+  const button=document.querySelector(`.nav-btn[data-tab="${tab}"]`);
+  if(button) button.classList.add('active');
+
+  if(tab==='plans'){
+    renderPlans();
+    renderPlanPicker();
+  }
+  if(tab==='library') renderLibrary();
+  if(tab==='skills') renderSkills();
+  if(tab==='progress') renderProgress();
+  if(tab==='profile') renderProfile();
+  if(tab==='training') renderTrainingPicker();
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- WOCHENSTATISTIK UND SERIE ---------- */
+
+function weekWorkouts(){
+  const now=new Date();
+  const monday=new Date(now);
+  const day=(now.getDay()+6)%7;
+  monday.setDate(now.getDate()-day);
+  monday.setHours(0,0,0,0);
+
+  return data.workouts.filter(w=>new Date(w.date)>=monday);
+}
+
+function streak(){
+  const dates=[...new Set(data.workouts.map(w=>dateKey(w.date)))].sort().reverse();
+  if(!dates.length) return 0;
+
+  const today=new Date();
+  today.setHours(0,0,0,0);
+
+  const yesterday=new Date(today);
+  yesterday.setDate(yesterday.getDate()-1);
+
+  const first=new Date(dates[0]+'T00:00:00');
+  if(first<yesterday) return 0;
+
+  let count=0;
+  let expected=new Date(first);
+
+  for(const date of dates){
+    const current=new Date(date+'T00:00:00');
+    if(current.getTime()!==expected.getTime()) break;
+    count++;
+    expected.setDate(expected.getDate()-1);
+  }
+
+  return count;
+}
+
+function totalReps(){
+  return data.workouts.reduce((sum,w)=>sum+number(w.reps),0);
+}
+
+function totalSeconds(){
+  return data.workouts.reduce((sum,w)=>sum+number(w.seconds),0);
+}
+
+function refreshAll(){
+  const total=data.workouts.length;
+  const reps=totalReps();
+  const seconds=totalSeconds();
+  const weekly=weekWorkouts().length;
+  const goal=Math.max(1,number(data.weeklyGoal)||3);
+  const xp=number(data.xp);
+  const r=rank(xp);
+
+  if($('rankName')) $('rankName').textContent=r.current.name;
+  if($('levelLabel')) $('levelLabel').textContent='Level '+(rankNames.indexOf(r.current)+1);
+
+  const currentXP=xp-r.current.xp;
+  const nextXP=r.next?r.next.xp-r.current.xp:0;
+  const percent=r.next?Math.min(100,currentXP/nextXP*100):100;
+
+  if($('xpBar')) $('xpBar').style.width=percent+'%';
+  if($('xpText')){
+    $('xpText').textContent=r.next
+      ? `${xp} XP · Noch ${r.next.xp-xp} XP bis ${r.next.name}`
+      : `${xp} XP · Höchster Rang erreicht`;
+  }
+
+  if($('weeklyGoalLabel')) $('weeklyGoalLabel').textContent=`${weekly} / ${goal} Trainings`;
+  if($('weeklyGoalBar')) $('weeklyGoalBar').style.width=Math.min(100,weekly/goal*100)+'%';
+  if($('weeklyGoalText')){
+    $('weeklyGoalText').textContent=weekly>=goal
+      ? 'Wochenziel erreicht.'
+      : `Noch ${goal-weekly} Training${goal-weekly===1?'':'s'} bis zu deinem Wochenziel.`;
+  }
+
+  if($('statWorkouts')) $('statWorkouts').textContent=total;
+  if($('statReps')) $('statReps').textContent=reps.toLocaleString('de-DE');
+  if($('statSeconds')) $('statSeconds').textContent=seconds.toLocaleString('de-DE');
+  if($('statStreak')) $('statStreak').textContent=streak();
+
+  const last=[...data.workouts].sort((a,b)=>new Date(b.date)-new Date(a.date))[0];
+  if($('lastWorkout')){
+    $('lastWorkout').textContent=last
+      ? `${formatDate(last.date)} · ${last.sets} Sätze · ${last.minutes} Minuten`
+      : 'Noch kein Training gespeichert.';
+  }
+}
+
+/* ---------- TRAININGSAUSWAHL ---------- */
+
+let selectedExercises=[];
+let session=null;
+
+function renderTrainingPicker(){
+  const target=$('trainingPicker');
+  if(!target) return;
+
+  target.innerHTML=`
+    <div class="field">
+      <label>Übungen für deine Einheit auswählen</label>
+      <input class="input" id="trainingSearch" placeholder="Übung suchen..." oninput="filterTrainingPicker()">
+    </div>
+    <div id="trainingPickerList"></div>
+  `;
+
+  filterTrainingPicker();
+}
+
+function filterTrainingPicker(){
+  const list=$('trainingPickerList');
+  if(!list) return;
+
+  const query=($('trainingSearch')?.value||'').toLowerCase();
+
+  const exercises=db.filter(e=>
+    e.name.toLowerCase().includes(query) ||
+    e.category.toLowerCase().includes(query)
+  );
+
+  list.innerHTML=exercises.map(e=>`
+    <label class="list-item">
+      <span>
+        <strong>${esc(e.name)}</strong>
+        <div class="small muted">${esc(e.category)} · ${esc(e.level)}</div>
+      </span>
+      <input type="checkbox" value="${esc(e.id)}"
+        ${selectedExercises.includes(e.id)?'checked':''}
+        onchange="toggleTrainingExercise('${esc(e.id)}',this.checked)">
+    </label>
+  `).join('')||'<div class="empty">Keine Übungen gefunden.</div>';
+}
+
+function toggleTrainingExercise(id,checked){
+  if(checked){
+    if(!selectedExercises.includes(id)) selectedExercises.push(id);
+  }else{
+    selectedExercises=selectedExercises.filter(x=>x!==id);
+  }
+}
+
+function startCustomWorkout(){
+  if(!selectedExercises.length){
+    toast('Wähle zuerst mindestens eine Übung aus.');
+    return;
+  }
+
+  const items=selectedExercises
+    .map(id=>db.find(e=>e.id===id))
+    .filter(Boolean)
+    .map(e=>({...e,sets:3,target: e.unit==='Sekunden'?20:10}));
+
+  startSession(items,0,'Freies Training');
+}
+
+/* ---------- TRAINING GENERIEREN ---------- */
+
+function generateWorkout(){
+  const groups=['Brust','Rücken','Beine','Core'];
+  const chosen=[];
+
+  for(const group of groups){
+    const options=db.filter(e=>
+      e.category===group &&
+      e.level!=='Schwer'
+    );
+
+    if(options.length){
+      chosen.push(options[Math.floor(Math.random()*options.length)]);
+    }
+  }
+
+  if(!chosen.length){
+    toast('Keine passenden Übungen gefunden.');
+    return;
+  }
+
+  const items=chosen.map(e=>({
+    ...e,
+    sets:3,
+    target:e.unit==='Sekunden'?20:10
+  }));
+
+  startSession(items,0,'Generiertes Training');
+}
+
+/* ---------- TRAINING STARTEN ---------- */
+
+function startSession(items,mins=0,source='Training'){
+  if(!Array.isArray(items)||!items.length){
+    toast('Keine Übungen vorhanden.');
+    return;
+  }
+
+  session={
+    items:items.map(e=>({
+      ...e,
+      sets:Math.max(1,number(e.sets)||3),
+      target:Math.max(1,number(e.target)||(
+        e.unit==='Sekunden'?20:10
+      ))
+    })),
+    source,
+    startedAt:Date.now(),
+    done:{},
+    values:{}
+  };
+
+  $('trainingSetup').classList.add('hidden');
+  $('activeTraining').classList.remove('hidden');
+  $('sessionTitle').textContent=source;
+
+  stopTimer();
+  resetStopwatch();
+  renderSession();
+
+  toast('Training gestartet.');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderSession(){
+  if(!session) return;
+
+  let totalSets=0;
+  let completedSets=0;
+
+  const html=session.items.map((e,i)=>{
+    totalSets+=e.sets;
+
+    let rows='';
+
+    for(let j=0;j<e.sets;j++){
+      const key=`${i}_${j}`;
+      const checked=!!session.done[key];
+      const value=session.values[key]??e.target;
+
+      if(checked) completedSets++;
+
+      rows+=`
+        <div class="set-row">
+          <span class="small muted">${j+1}.</span>
+          <span class="small">Satz ${j+1}</span>
+          <input type="number" min="0" step="1"
+            aria-label="Wert für Satz ${j+1}"
+            value="${number(value)}"
+            onchange="updateSetValue(${i},${j},this.value)">
+          <input type="checkbox" aria-label="Satz abschließen"
+            ${checked?'checked':''}
+            onchange="markSet(${i},${j},this.checked)">
+        </div>
+      `;
+    }
+
+    return `
+      <div class="exercise-card">
+        <div class="section-heading">
+          <div>
+            <strong>${esc(e.name)}</strong>
+            <div class="small muted">${esc(e.muscles)}</div>
+          </div>
+          <span class="badge">${e.sets} Sätze</span>
+        </div>
+        <div class="small muted">
+          Eintragen: ${e.unit==='Sekunden'?'tatsächliche Sekunden':'tatsächliche Wiederholungen'}
+        </div>
+        ${rows}
+      </div>
+    `;
+  }).join('');
+
+  $('sessionExercises').innerHTML=html;
+  $('sessionSetCount').textContent=`${completedSets} / ${totalSets} Sätze`;
+}
+
+function updateSetValue(i,j,value){
+  if(!session) return;
+  const key=`${i}_${j}`;
+  const parsed=Math.floor(Number(value));
+
+  if(!Number.isFinite(parsed)||parsed<0){
+    toast('Bitte eine gültige Zahl eingeben.');
+    renderSession();
+    return;
+  }
+
+  session.values[key]=parsed;
+}
+
+function markSet(i,j,checked){
+  if(!session) return;
+
+  const key=`${i}_${j}`;
+  session.done[key]=checked;
+
+  renderSession();
+}
+
+/* ---------- ÜBUNG IN EINER EINHEIT ERSETZEN ---------- */
+
+function replaceExercise(index){
+  if(!session) return;
+
+  const current=session.items[index];
+  const options=db.filter(e=>
+    e.category===current.category &&
+    e.id!==current.id
+  );
+
+  if(!options.length){
+    toast('Keine alternative Übung gefunden.');
+    return;
+  }
+
+  modal(
+    'Übung ersetzen',
+    options.map(e=>`
+      <button class="btn" style="width:100%;margin-bottom:8px;text-align:left"
+        onclick="confirmReplaceExercise(${index},'${esc(e.id)}')">
+        ${esc(e.name)} <span class="small muted">· ${esc(e.level)}</span>
+      </button>
+    `).join('')
+  );
+}
+
+function confirmReplaceExercise(index,id){
+  if(!session) return;
+
+  const replacement=db.find(e=>e.id===id);
+  if(!replacement) return;
+
+  const old=session.items[index];
+
+  session.items[index]={
+    ...replacement,
+    sets:old.sets,
+    target:replacement.unit===old.unit?old.target:(replacement.unit==='Sekunden'?20:10)
+  };
+
+  for(const key of Object.keys(session.done)){
+    if(key.startsWith(index+'_')) delete session.done[key];
+  }
+  for(const key of Object.keys(session.values)){
+    if(key.startsWith(index+'_')) delete session.values[key];
+  }
+
+  closeModal();
+  renderSession();
+}
+
+/* ---------- TRAINING ABSCHLIESSEN ---------- */
+
+function finishSession(){
+  if(!session) return;
+
+  let sets=0;
+  let reps=0;
+  let seconds=0;
+  const results=[];
+
+  session.items.forEach((e,i)=>{
+    const setResults=[];
+
+    for(let j=0;j<e.sets;j++){
+      const key=`${i}_${j}`;
+      const completed=!!session.done[key];
+      const value=number(session.values[key]??e.target);
+
+      setResults.push({
+        setNumber:j+1,
+        completed,
+        value:completed?value:0
+      });
+
+      if(completed){
+        sets++;
+        if(e.unit==='Sekunden') seconds+=value;
+        else reps+=value;
+      }
+    }
+
+    results.push({
+      exerciseId:e.id,
+      name:e.name,
+      unit:e.unit,
+      sets:setResults
+    });
+  });
+
+  if(!sets){
+    toast('Schließe mindestens einen Satz ab.');
+    return;
+  }
+
+  const elapsed=Math.max(1,Math.round((Date.now()-session.startedAt)/60000));
+  const xp=sets*10+20;
+  const previousRank=rank(data.xp).current.name;
+
+  const workout={
+    id:'workout_'+Date.now(),
+    date:new Date().toISOString(),
+    minutes:elapsed,
+    sets,
+    exercises:session.items.map(e=>e.name),
+    xp,
+    reps,
+    seconds,
+    results,
+    legacy:false
+  };
+
+  data.workouts.push(workout);
+  data.xp+=xp;
+
+  stopTimer();
+  resetStopwatch();
+
+  session=null;
+  selectedExercises=[];
+
+  $('activeTraining').classList.add('hidden');
+  $('trainingSetup').classList.remove('hidden');
+
+  save();
+  checkAchievements();
+
+  const newRank=rank(data.xp).current.name;
+
+  if(newRank!==previousRank){
+    modal(
+      'Neuer Rang erreicht!',
+      `<div class="rank-animation" style="text-align:center;padding:25px">
+        <div style="font-size:42px">🏆</div>
+        <h2 class="accent">${esc(newRank)}</h2>
+        <p class="muted">Du hast einen neuen Rang freigeschaltet.</p>
+      </div>`
+    );
+  }else{
+    toast(`Training gespeichert · +${xp} XP`);
+  }
+
+  renderTrainingPicker();
+  refreshAll();
+}
+
+/* ---------- TRAINING ABBRECHEN ---------- */
+
+function cancelSession(){
+  if(!session) return;
+
+  modal(
+    'Training abbrechen?',
+    `<p class="muted">Deine aktuelle Einheit wird nicht gespeichert.</p>
+     <div class="btn-row">
+       <button class="btn btn-danger" onclick="confirmCancelSession()">Abbrechen</button>
+       <button class="btn" onclick="closeModal()">Weiter trainieren</button>
+     </div>`
+  );
+}
+
+function confirmCancelSession(){
+  session=null;
+  selectedExercises=[];
+  stopTimer();
+  resetStopwatch();
+
+  $('activeTraining').classList.add('hidden');
+  $('trainingSetup').classList.remove('hidden');
+
+  closeModal();
+  renderTrainingPicker();
+  toast('Training verworfen.');
+}
+
+/* ---------- PAUSE-TIMER ---------- */
+
+let timerLeft=60;
+let timerInterval=null;
+let timerRunning=false;
+let timerEnd=0;
+
+function setTimer(seconds){
+  stopTimer();
+  timerLeft=Math.max(1,number(seconds));
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay(){
+  const m=Math.floor(timerLeft/60);
+  const s=timerLeft%60;
+
+  if($('timerDisplay')){
+    $('timerDisplay').textContent=
+      `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+
+  if($('timerToggle')){
+    $('timerToggle').textContent=timerRunning?'Pause':'Start';
+  }
+}
+
+function toggleTimer(){
+  if(timerRunning){
+    timerLeft=Math.max(0,Math.ceil((timerEnd-Date.now())/1000));
+    clearInterval(timerInterval);
+    timerInterval=null;
+    timerRunning=false;
+    updateTimerDisplay();
+    return;
+  }
+
+  if(timerLeft<=0) timerLeft=60;
+
+  timerEnd=Date.now()+timerLeft*1000;
+  timerRunning=true;
+  updateTimerDisplay();
+
+  timerInterval=setInterval(()=>{
+    timerLeft=Math.max(0,Math.ceil((timerEnd-Date.now())/1000));
+    updateTimerDisplay();
+
+    if(timerLeft<=0){
+      clearInterval(timerInterval);
+      timerInterval=null;
+      timerRunning=false;
+      timerFinished();
+    }
+  },200);
+}
+
+function stopTimer(){
+  clearInterval(timerInterval);
+  timerInterval=null;
+  timerRunning=false;
+  timerLeft=60;
+  timerEnd=0;
+  updateTimerDisplay();
+}
+
+function timerFinished(){
+  timerLeft=0;
+  updateTimerDisplay();
+
+  if($('timerDisplay')){
+    $('timerDisplay').classList.add('rank-animation');
+    setTimeout(()=>$('timerDisplay')?.classList.remove('rank-animation'),1200);
+  }
+
+  beep();
+
+  if(navigator.vibrate){
+    navigator.vibrate([180,100,180]);
+  }
+
+  toast('Pause beendet!');
+}
+
+function beep(){
+  try{
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx) return;
+
+    const ctx=new AudioCtx();
+    const oscillator=ctx.createOscillator();
+    const gain=ctx.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+    oscillator.frequency.value=740;
+    gain.gain.value=.12;
+
+    oscillator.start();
+    oscillator.stop(ctx.currentTime+.35);
+    oscillator.onended=()=>ctx.close();
+  }catch(error){
+    console.log('Audio nicht verfügbar.');
+  }
+}
+
+/* ---------- STOPPUHR ---------- */
+
+let stopwatchRunning=false;
+let stopwatchStart=0;
+let stopwatchElapsed=0;
+let stopwatchInterval=null;
+
+function formatStopwatch(ms){
+  const total=Math.floor(ms/1000);
+  const h=Math.floor(total/3600);
+  const m=Math.floor((total%3600)/60);
+  const s=total%60;
+
+  if(h>0){
+    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function updateStopwatchDisplay(){
+  const elapsed=stopwatchRunning
+    ? stopwatchElapsed+(Date.now()-stopwatchStart)
+    : stopwatchElapsed;
+
+  if($('stopwatchDisplay')){
+    $('stopwatchDisplay').textContent=formatStopwatch(elapsed);
+  }
+
+  if($('stopwatchToggle')){
+    $('stopwatchToggle').textContent=stopwatchRunning?'Pause':'Start';
+  }
+}
+
+function toggleStopwatch(){
+  if(stopwatchRunning){
+    stopwatchElapsed+=Date.now()-stopwatchStart;
+    stopwatchRunning=false;
+    clearInterval(stopwatchInterval);
+    stopwatchInterval=null;
+  }else{
+    stopwatchStart=Date.now();
+    stopwatchRunning=true;
+    stopwatchInterval=setInterval(updateStopwatchDisplay,250);
+  }
+
+  updateStopwatchDisplay();
+}
+
+function resetStopwatch(){
+  stopwatchRunning=false;
+  clearInterval(stopwatchInterval);
+  stopwatchInterval=null;
+  stopwatchStart=0;
+  stopwatchElapsed=0;
+  updateStopwatchDisplay();
+}
+
+/* ---------- ENDE TEIL 2 ---------- */
+ /* ==========================================
+   TEIL 3: PLÄNE, ÜBUNGEN UND SKILLS
+========================================== */
+
+/* ---------- MODAL ---------- */
+
+function modal(title,content){
+  $('modalTitle').textContent=title;
+  $('modalContent').innerHTML=content;
+  $('modalBackdrop').classList.add('show');
+}
+
+function closeModal(){
+  $('modalBackdrop').classList.remove('show');
+}
+
+/* ---------- ÜBUNGSBIBLIOTHEK ---------- */
+
+let activeCategory='Alle';
+
+function renderLibrary(){
+  const search=($('exerciseSearch')?.value||'').toLowerCase();
+
+  const categories=['Alle',...new Set(db.map(e=>e.category))];
+
+  $('categoryFilters').innerHTML=categories.map(category=>`
+    <button class="btn btn-small ${activeCategory===category?'btn-primary':''}"
+      onclick="setLibraryCategory('${esc(category)}')">
+      ${esc(category)}
+    </button>
+  `).join('');
+
+  const filtered=db.filter(e=>{
+    const matchesCategory=activeCategory==='Alle'||e.category===activeCategory;
+    const matchesSearch=
+      e.name.toLowerCase().includes(search)||
+      e.muscles.toLowerCase().includes(search)||
+      e.category.toLowerCase().includes(search);
+
+    return matchesCategory&&matchesSearch;
+  });
+
+  $('libraryList').innerHTML=filtered.map(e=>`
+    <div class="exercise-card">
+      <div class="section-heading">
+        <div>
+          <strong>${esc(e.name)}</strong>
+          <div class="small muted">${esc(e.muscles)}</div>
+        </div>
+        <span class="badge">${esc(e.level)}</span>
+      </div>
+      <div class="small muted">${esc(e.category)} · ${esc(e.unit)}</div>
+      <div class="btn-row">
+        <button class="btn btn-small" onclick="exerciseDetail('${esc(e.id)}')">
+          Details ansehen
+        </button>
+        <button class="btn btn-small btn-primary"
+          onclick="addExerciseToPlan('${esc(e.id)}')">
+          Zum Plan
+        </button>
+      </div>
+    </div>
+  `).join('')||'<div class="empty">Keine Übungen gefunden.</div>';
+}
+
+function setLibraryCategory(category){
+  activeCategory=category;
+  renderLibrary();
+}
+
+/* ---------- ÜBUNGSDETAILS ---------- */
+
+function exerciseDetail(id){
+  const e=db.find(x=>x.id===id);
+  if(!e) return;
+
+  const prerequisites=(e.prerequisites||[])
+    .map(pid=>db.find(x=>x.id===pid)?.name||pid);
+
+  modal(
+    e.name,
+    `
+    <div class="btn-row" style="margin-top:0;margin-bottom:12px">
+      <span class="pill">${esc(e.category)}</span>
+      <span class="pill pill-cyan">${esc(e.level)}</span>
+      <span class="badge">${esc(e.unit)}</span>
+    </div>
+
+    <h3>Beanspruchte Muskeln</h3>
+    <p class="small muted">${esc(e.muscles)}</p>
+
+    <div class="divider"></div>
+
+    <h3>Ausführung</h3>
+    <p class="small muted">${esc(e.how)}</p>
+
+    <div class="divider"></div>
+
+    <h3>Schritt-für-Schritt</h3>
+    <ol style="padding-left:20px;line-height:1.8;font-size:13px">
+      ${(e.steps||[]).map(step=>`<li>${esc(step)}</li>`).join('')}
+    </ol>
+
+    <div class="divider"></div>
+
+    <h3>Häufige Technikfehler</h3>
+    <ul style="padding-left:20px;line-height:1.8;font-size:13px;color:var(--muted)">
+      ${(e.mistakes||[]).map(m=>`<li>${esc(m)}</li>`).join('')}
+    </ul>
+
+    <div class="divider"></div>
+
+    <h3>Techniktipp</h3>
+    <p class="small muted">${esc(e.tip)}</p>
+
+    <div class="divider"></div>
+
+    <h3>Voraussetzungen</h3>
+    <p class="small muted">
+      ${prerequisites.length?prerequisites.map(esc).join(', '):'Keine besonderen Voraussetzungen hinterlegt.'}
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="grid">
+      <div>
+        <h3 class="accent">Leichtere Variante</h3>
+        <p class="small muted">${esc(e.regression||'Nicht hinterlegt')}</p>
+      </div>
+      <div>
+        <h3 class="cyan">Schwierigere Variante</h3>
+        <p class="small muted">${esc(e.progression||'Nicht hinterlegt')}</p>
+      </div>
+    </div>
+
+    ${e.custom?`
+      <div class="divider"></div>
+      <button class="btn btn-danger btn-small"
+        onclick="deleteCustomExercise('${esc(e.id)}')">
+        Eigene Übung löschen
+      </button>
+    `:''}
+    `
+  );
+}
+
+/* ---------- EIGENE ÜBUNGEN ---------- */
+
+function addCustomExercise(){
+  const name=$('customName').value.trim();
+  const muscles=$('customMuscles').value.trim();
+  const level=$('customLevel').value;
+  const unit=$('customUnit').value;
+  const how=$('customHow').value.trim();
+  const tip=$('customTip').value.trim();
+
+  if(!name||!muscles||!how){
+    toast('Bitte Name, Muskelgruppe und Ausführung ausfüllen.');
+    return;
+  }
+
+  const id='custom_'+Date.now();
+
+  const exercise={
+    id,
+    name,
+    category:'Eigene Übungen',
+    level,
+    unit,
+    muscles,
+    how,
+    tip:tip||'Achte auf eine kontrollierte Ausführung.',
+    steps:[how],
+    mistakes:[],
+    prerequisites:[],
+    regression:'Bewegung vereinfachen oder Belastung reduzieren.',
+    progression:'Schrittweise anspruchsvoller gestalten.',
+    custom:true
+  };
+
+  db.push(exercise);
+  data.customExercises=db.filter(e=>e.custom);
+
+  save();
+
+  ['customName','customMuscles','customHow','customTip'].forEach(id=>{
+    $(id).value='';
+  });
+
+  renderLibrary();
+  toast('Eigene Übung gespeichert.');
+}
+
+function deleteCustomExercise(id){
+  const exercise=db.find(e=>e.id===id);
+
+  if(!exercise||!exercise.custom){
+    toast('Diese Übung kann nicht gelöscht werden.');
+    return;
+  }
+
+  modal(
+    'Übung löschen?',
+    `
+      <p class="muted small">
+        Die Übung "${esc(exercise.name)}" wird aus deiner Bibliothek entfernt.
+        Bereits gespeicherte Trainings bleiben erhalten.
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-danger" onclick="confirmDeleteCustomExercise('${esc(id)}')">
+          Löschen
+        </button>
+        <button class="btn" onclick="closeModal()">Abbrechen</button>
+      </div>
+    `
+  );
+}
+
+function confirmDeleteCustomExercise(id){
+  db=db.filter(e=>e.id!==id);
+  data.customExercises=db.filter(e=>e.custom);
+
+  data.plans=data.plans.map(plan=>({
+    ...plan,
+    items:plan.items.filter(item=>item.id!==id)
+  }));
+
+  save();
+  closeModal();
+  renderLibrary();
+  renderPlans();
+
+  toast('Übung gelöscht.');
+}
+
+/* ---------- TRAININGSPLÄNE ---------- */
+
+let planDraft=[];
+let editingPlanId=null;
+
+function newPlan(){
+  planDraft=[];
+  editingPlanId=null;
+
+  if($('planName')) $('planName').value='';
+
+  renderPlanPicker();
+  renderDraft();
+}
+
+function renderPlanPicker(){
+  const target=$('planPicker');
+  if(!target) return;
+
+  const categories=[...new Set(db.map(e=>e.category))];
+
+  target.innerHTML=`
+    <div class="field">
+      <label>Übung zum Plan hinzufügen</label>
+      <input class="input" id="planSearch"
+        placeholder="Übung suchen..."
+        oninput="filterPlanPicker()">
+    </div>
+    <div id="planPickerList"></div>
+  `;
+
+  filterPlanPicker();
+}
+
+function filterPlanPicker(){
+  const target=$('planPickerList');
+  if(!target) return;
+
+  const query=($('planSearch')?.value||'').toLowerCase();
+
+  const exercises=db.filter(e=>
+    e.name.toLowerCase().includes(query)||
+    e.category.toLowerCase().includes(query)
+  );
+
+  target.innerHTML=exercises.map(e=>`
+    <div class="list-item">
+      <span>
+        <strong class="small">${esc(e.name)}</strong>
+        <div class="small muted">${esc(e.category)} · ${esc(e.level)}</div>
+      </span>
+      <button class="btn btn-small"
+        onclick="addToDraft('${esc(e.id)}')">+</button>
+    </div>
+  `).join('')||'<div class="empty">Keine Übungen gefunden.</div>';
+}
+
+function addToDraft(id){
+  const exercise=db.find(e=>e.id===id);
+  if(!exercise) return;
+
+  planDraft.push({
+    id:exercise.id,
+    sets:3,
+    target:exercise.unit==='Sekunden'?20:10
+  });
+
+  renderDraft();
+  toast('Übung hinzugefügt.');
+}
+
+function addExerciseToPlan(id){
+  addToDraft(id);
+  openTab('plans');
+}
+
+function removeDraft(index){
+  planDraft.splice(index,1);
+  renderDraft();
+}
+
+function updateDraftValue(index,field,value){
+  if(!planDraft[index]) return;
+
+  const parsed=Math.floor(Number(value));
+
+  if(!Number.isFinite(parsed)||parsed<1){
+    toast('Bitte einen Wert ab 1 eingeben.');
+    renderDraft();
+    return;
+  }
+
+  if(field==='sets'){
+    planDraft[index].sets=Math.min(20,parsed);
+  }else{
+    planDraft[index].target=Math.min(9999,parsed);
+  }
+}
+
+function renderDraft(){
+  const target=$('planDraft');
+  if(!target) return;
+
+  if(!planDraft.length){
+    target.innerHTML='<div class="empty">Noch keine Übungen im Plan.</div>';
+    return;
+  }
+
+  target.innerHTML=`
+    <div class="divider"></div>
+    <h3>Dein Plan · ${planDraft.length} Übungen</h3>
+    ${planDraft.map((item,i)=>{
+      const e=db.find(x=>x.id===item.id);
+      if(!e) return '';
+
+      return `
+        <div class="exercise-card">
+          <div class="section-heading">
+            <strong>${esc(e.name)}</strong>
+            <button class="btn btn-small btn-danger"
+              onclick="removeDraft(${i})">Entfernen</button>
+          </div>
+
+          <div class="grid">
+            <div class="field">
+              <label>Sätze</label>
+              <input class="input" type="number" min="1" max="20"
+                value="${item.sets}"
+                onchange="updateDraftValue(${i},'sets',this.value)">
+            </div>
+            <div class="field">
+              <label>${e.unit==='Sekunden'?'Ziel-Sekunden':'Ziel-Wiederholungen'}</label>
+              <input class="input" type="number" min="1"
+                value="${item.target}"
+                onchange="updateDraftValue(${i},'target',this.value)">
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('')}
+  `;
+}
+
+function savePlan(){
+  const name=$('planName').value.trim();
+
+  if(!name){
+    toast('Bitte gib deinem Plan einen Namen.');
+    return;
+  }
+
+  if(!planDraft.length){
+    toast('Füge zuerst Übungen hinzu.');
+    return;
+  }
+
+  const plan={
+    id:editingPlanId||'plan_'+Date.now(),
+    name,
+    items:planDraft.map(item=>({...item})),
+    updated:Date.now()
+  };
+
+  if(editingPlanId){
+    const index=data.plans.findIndex(p=>p.id===editingPlanId);
+    if(index>=0) data.plans[index]=plan;
+    else data.plans.push(plan);
+  }else{
+    data.plans.push(plan);
+  }
+
+  planDraft=[];
+  editingPlanId=null;
+  $('planName').value='';
+
+  save();
+  renderPlans();
+  renderDraft();
+  toast('Trainingsplan gespeichert.');
+}
+
+function renderPlans(){
+  const target=$('savedPlans');
+  if(!target) return;
+
+  if(!data.plans.length){
+    target.innerHTML='<div class="empty">Du hast noch keine Trainingspläne gespeichert.</div>';
+    return;
+  }
+
+  target.innerHTML=data.plans.map(plan=>`
+    <div class="exercise-card">
+      <div class="section-heading">
+        <div>
+          <strong>${esc(plan.name)}</strong>
+          <div class="small muted">${plan.items.length} Übungen</div>
+        </div>
+        <span class="pill">${plan.items.reduce((sum,item)=>sum+number(item.sets),0)} Sätze</span>
+      </div>
+
+      <div class="small muted">
+        ${plan.items.map(item=>{
+          const e=db.find(x=>x.id===item.id);
+          return e?esc(e.name):'Unbekannte Übung';
+        }).join(' · ')}
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary btn-small"
+          onclick="startPlan('${esc(plan.id)}')">Starten</button>
+        <button class="btn btn-small"
+          onclick="editPlan('${esc(plan.id)}')">Bearbeiten</button>
+        <button class="btn btn-small btn-danger"
+          onclick="deletePlan('${esc(plan.id)}')">Löschen</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function startPlan(id){
+  const plan=data.plans.find(p=>p.id===id);
+  if(!plan) return;
+
+  const items=plan.items.map(item=>{
+    const exercise=db.find(e=>e.id===item.id);
+    if(!exercise) return null;
+
+    return {
+      ...exercise,
+      sets:number(item.sets)||3,
+      target:number(item.target)||(exercise.unit==='Sekunden'?20:10)
+    };
+  }).filter(Boolean);
+
+  if(!items.length){
+    toast('Dieser Plan enthält keine verfügbaren Übungen.');
+    return;
+  }
+
+  openTab('training');
+  startSession(items,0,plan.name);
+}
+
+function editPlan(id){
+  const plan=data.plans.find(p=>p.id===id);
+  if(!plan) return;
+
+  editingPlanId=id;
+  planDraft=plan.items.map(item=>({...item}));
+  $('planName').value=plan.name;
+
+  renderDraft();
+  renderPlanPicker();
+
+  window.scrollTo({top:0,behavior:'smooth'});
+  toast('Plan wird bearbeitet.');
+}
+
+function deletePlan(id){
+  const plan=data.plans.find(p=>p.id===id);
+  if(!plan) return;
+
+  modal(
+    'Trainingsplan löschen?',
+    `
+      <p class="small muted">Möchtest du "${esc(plan.name)}" wirklich löschen?</p>
+      <div class="btn-row">
+        <button class="btn btn-danger"
+          onclick="confirmDeletePlan('${esc(id)}')">Löschen</button>
+        <button class="btn" onclick="closeModal()">Abbrechen</button>
+      </div>
+    `
+  );
+}
+
+function confirmDeletePlan(id){
+  data.plans=data.plans.filter(p=>p.id!==id);
+  save();
+  renderPlans();
+  closeModal();
+  toast('Plan gelöscht.');
+}
+
+/* ---------- SKILLS ---------- */
+
+const skills=[
+  {
+    id:'pushup_master',
+    name:'Push-up Master',
+    description:'Kontrollierte Liegestütze als Grundlage.',
+    requirement:'Push-ups sicher beherrschen.',
+    category:'Kraft',
+    icon:'💪'
+  },
+  {
+    id:'plank_master',
+    name:'Plank Master',
+    description:'Stabile Rumpfspannung.',
+    requirement:'Plank kontrolliert halten.',
+    category:'Core',
+    icon:'🧱'
+  },
+  {
+    id:'hollow_body',
+    name:'Hollow Body',
+    description:'Eine wichtige Grundlage für viele Calisthenics-Skills.',
+    requirement:'Hollow Body Hold kontrolliert halten.',
+    category:'Core',
+    icon:'⚡'
+  },
+  {
+    id:'tuck_lsit',
+    name:'Tuck L-Sit',
+    description:'Stützposition mit angezogenen Knien.',
+    requirement:'Tuck L-Sit stabil halten.',
+    category:'Skill',
+    icon:'🔥'
+  },
+  {
+    id:'lsit',
+    name:'L-Sit',
+    description:'Gestreckte Beine in der Stützposition.',
+    requirement:'Tuck L-Sit als Vorstufe.',
+    category:'Skill',
+    icon:'◈'
+  },
+  {
+    id:'crow',
+    name:'Crow Pose',
+    description:'Balance auf den Händen.',
+    requirement:'Kontrollierte Gewichtsverlagerung.',
+    category:'Balance',
+    icon:'🪽'
+  },
+  {
+    id:'handstand',
+    name:'Handstand',
+    description:'Kontrollierte Überkopfposition.',
+    requirement:'Schulterstabilität und sichere Vorstufen.',
+    category:'Skill',
+    icon:'↑'
+  }
+];
+
+function renderSkills(){
+  const target=$('skillsList');
+  if(!target) return;
+
+  target.innerHTML=skills.map(skill=>{
+    const unlocked=!!data.skills[skill.id];
+
+    return `
+      <div class="skill-card ${unlocked?'unlocked':''}">
+        <div class="section-heading">
+          <div>
+            <div style="font-size:23px;margin-bottom:5px">${skill.icon}</div>
+            <strong>${esc(skill.name)}</strong>
+          </div>
+          <span class="pill ${unlocked?'':'pill-cyan'}">
+            ${unlocked?'Freigeschaltet':'Gesperrt'}
+          </span>
+        </div>
+
+        <p class="small muted">${esc(skill.description)}</p>
+        <p class="small muted" style="margin-top:8px">
+          Voraussetzung: ${esc(skill.requirement)}
+        </p>
+
+        <div class="btn-row">
+          <button class="btn btn-small ${unlocked?'':'btn-primary'}"
+            onclick="toggleSkill('${esc(skill.id)}')">
+            ${unlocked?'Als nicht erreicht markieren':'Skill freischalten'}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleSkill(id){
+  if(data.skills[id]){
+    delete data.skills[id];
+    toast('Skill zurückgesetzt.');
+  }else{
+    data.skills[id]={
+      unlocked:true,
+      date:new Date().toISOString()
+    };
+    toast('Skill freigeschaltet!');
+  }
+
+  save();
+  renderSkills();
+}
+
+/* ---------- ACHIEVEMENTS ---------- */
+
+const achievements=[
+  {
+    id:'first_workout',
+    name:'Erster Schritt',
+    description:'Absolviere dein erstes Training.',
+    check:()=>data.workouts.length>=1
+  },
+  {
+    id:'five_workouts',
+    name:'Dranbleiben',
+    description:'Absolviere fünf Trainings.',
+    check:()=>data.workouts.length>=5
+  },
+  {
+    id:'ten_workouts',
+    name:'Routine aufgebaut',
+    description:'Absolviere zehn Trainings.',
+    check:()=>data.workouts.length>=10
+  },
+  {
+    id:'hundred_reps',
+    name:'100 Wiederholungen',
+    description:'Sammle insgesamt 100 Wiederholungen.',
+    check:()=>totalReps()>=100
+  },
+  {
+    id:'one_thousand_xp',
+    name:'XP-Sammler',
+    description:'Erreiche 1.000 XP.',
+    check:()=>data.xp>=1000
+  }
+];
+
+function checkAchievements(){
+  if(!Array.isArray(data.achievements)) data.achievements=[];
+
+  let unlocked=[];
+
+  achievements.forEach(a=>{
+    if(!data.achievements.includes(a.id)&&a.check()){
+      data.achievements.push(a.id);
+      unlocked.push(a);
+    }
+  });
+
+  if(unlocked.length){
+    save();
+
+    modal(
+      'Achievement freigeschaltet!',
+      unlocked.map(a=>`
+        <div class="exercise-card">
+          <strong class="accent">🏆 ${esc(a.name)}</strong>
+          <p class="small muted">${esc(a.description)}</p>
+        </div>
+      `).join('')
+    );
+  }
+}
+
+/* ---------- ENDE TEIL 3 ---------- */
+ /* ---------- TEIL 4: STATISTIKEN, PROFIL & BACKUP ---------- */
+
+/* ---------- DATEN NORMALISIEREN ---------- */
+
+function normalizeCustomExercises() {
+  data.customExercises = (data.customExercises || []).map((e, i) => ({
+    id: e.id || `custom_${Date.now()}_${i}`,
+    name: e.name || "Eigene Übung",
+    category: e.category || "Ganzkörper",
+    muscles: e.muscles || "Nicht angegeben",
+    difficulty: e.difficulty || "Anfänger",
+    type: e.type || "reps",
+    description: e.description || "Eigene Übung",
+    instructions: Array.isArray(e.instructions) ? e.instructions : [],
+    mistakes: Array.isArray(e.mistakes) ? e.mistakes : [],
+    tips: Array.isArray(e.tips) ? e.tips : [],
+    regression: e.regression || "",
+    progression: e.progression || "",
+    prerequisites: e.prerequisites || "",
+    custom: true
+  }));
+
+  db = [...baseExercises, ...data.customExercises];
+}
+
+
+/* ---------- DATUMS- UND FORMATFUNKTIONEN ---------- */
+
+function safeDate(value) {
+  if (!value) return null;
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return null;
+
+  return date;
+}
+
+function dateKey(date) {
+  const d = new Date(date);
+
+  return [
+    d.getFullYear(),
+    String(d.getMonth() + 1).padStart(2, "0"),
+    String(d.getDate()).padStart(2, "0")
+  ].join("-");
+}
+
+function formatDate(value) {
+  const date = safeDate(value);
+
+  if (!date) return "Unbekanntes Datum";
+
+  return date.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+}
+
+function formatDuration(seconds) {
+  seconds = Math.max(0, Number(seconds) || 0);
+
+  const minutes = Math.floor(seconds / 60);
+  const remaining = seconds % 60;
+
+  if (minutes === 0) return `${remaining} Sek.`;
+
+  return `${minutes} Min. ${String(remaining).padStart(2, "0")} Sek.`;
+}
+
+function getWorkoutDate(workout) {
+  return safeDate(
+    workout.date ||
+    workout.createdAt ||
+    workout.timestamp
+  );
+}
+
+function getWorkoutResults(workout) {
+  return Array.isArray(workout.results) ? workout.results : [];
+}
+
+function getWorkoutReps(workout) {
+  return getWorkoutResults(workout).reduce((total, result) => {
+    return total + Math.max(0, Number(result.reps) || 0);
+  }, 0);
+}
+
+function getWorkoutSeconds(workout) {
+  return getWorkoutResults(workout).reduce((total, result) => {
+    return total + Math.max(0, Number(result.seconds) || 0);
+  }, 0);
+}
+
+function getWorkoutSets(workout) {
+  return getWorkoutResults(workout).length;
+}
+
+
+/* ---------- STATISTIKEN ---------- */
+
+function renderProgress() {
+  const workouts = (data.workouts || [])
+    .filter(w => getWorkoutDate(w))
+    .sort((a, b) => getWorkoutDate(b) - getWorkoutDate(a));
+
+  const totalReps = workouts.reduce(
+    (sum, workout) => sum + getWorkoutReps(workout),
+    0
+  );
+
+  const totalSeconds = workouts.reduce(
+    (sum, workout) => sum + getWorkoutSeconds(workout),
+    0
+  );
+
+  const totalSets = workouts.reduce(
+    (sum, workout) => sum + getWorkoutSets(workout),
+    0
+  );
+
+  const totalWorkouts = workouts.length;
+
+  const setText = (id, value) => {
+    const element = $(id);
+
+    if (element) element.textContent = value;
+  };
+
+  setText("progressWorkouts", totalWorkouts);
+  setText("progressSets", totalSets);
+  setText("progressReps", totalReps.toLocaleString("de-DE"));
+  setText("progressSeconds", formatDuration(totalSeconds));
+
+  renderWeeklyChart(workouts);
+  renderHeatmap(workouts);
+  renderWorkoutHistory(workouts);
+}
+
+
+/* ---------- WOCHENCHART ---------- */
+
+function getMonday(date) {
+  const result = new Date(date);
+  const day = (result.getDay() + 6) % 7;
+
+  result.setDate(result.getDate() - day);
+  result.setHours(0, 0, 0, 0);
+
+  return result;
+}
+
+function renderWeeklyChart(workouts) {
+  const container = $("weeklyChart");
+
+  if (!container) return;
+
+  const weeks = [];
+
+  for (let i = 7; i >= 0; i--) {
+    const monday = getMonday(new Date());
+
+    monday.setDate(monday.getDate() - i * 7);
+
+    const sunday = new Date(monday);
+    sunday.setDate(sunday.getDate() + 6);
+    sunday.setHours(23, 59, 59, 999);
+
+    const count = workouts.filter(workout => {
+      const date = getWorkoutDate(workout);
+
+      return date && date >= monday && date <= sunday;
+    }).length;
+
+    weeks.push({
+      monday,
+      count
+    });
+  }
+
+  const max = Math.max(1, ...weeks.map(w => w.count));
+
+  container.innerHTML = weeks.map(week => {
+    const height = Math.max(5, (week.count / max) * 100);
+
+    const label = week.monday.toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "2-digit"
+    });
+
+    return `
+      <div class="chart-column">
+        <div class="chart-value">${week.count}</div>
+        <div class="chart-bar-wrap">
+          <div
+            class="chart-bar"
+            style="height:${height}%"
+            title="${week.count} Trainings"
+          ></div>
+        </div>
+        <div class="chart-label">${label}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+
+/* ---------- AKTIVITÄTS-HEATMAP ---------- */
+
+function renderHeatmap(workouts) {
+  const container = $("heatmap");
+
+  if (!container) return;
+
+  const activity = {};
+
+  workouts.forEach(workout => {
+    const date = getWorkoutDate(workout);
+
+    if (!date) return;
+
+    const key = dateKey(date);
+
+    activity[key] = (activity[key] || 0) + 1;
+  });
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const cells = [];
+
+  for (let i = 83; i >= 0; i--) {
+    const date = new Date(today);
+
+    date.setDate(date.getDate() - i);
+
+    const key = dateKey(date);
+    const count = activity[key] || 0;
+
+    let level = 0;
+
+    if (count === 1) level = 1;
+    if (count === 2) level = 2;
+    if (count >= 3) level = 3;
+
+    cells.push(`
+      <div
+        class="heatmap-cell level-${level}"
+        title="${formatDate(date)}: ${count} Trainings"
+      ></div>
+    `);
+  }
+
+  container.innerHTML = cells.join("");
+}
+
+
+/* ---------- TRAININGSVERLAUF ---------- */
+
+function renderWorkoutHistory(workouts) {
+  const container = $("workoutHistory");
+
+  if (!container) return;
+
+  if (!workouts.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📊</div>
+        <h3>Noch keine Trainings</h3>
+        <p>Deine abgeschlossenen Trainingseinheiten erscheinen hier.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML = workouts.slice(0, 30).map((workout, index) => {
+    const date = getWorkoutDate(workout);
+    const reps = getWorkoutReps(workout);
+    const seconds = getWorkoutSeconds(workout);
+    const sets = getWorkoutSets(workout);
+
+    const title = workout.name || workout.title || "Training";
+
+    return `
+      <div class="history-item">
+        <div class="history-main">
+          <div class="history-date">${formatDate(date)}</div>
+          <div class="history-title">${esc(title)}</div>
+          <div class="history-meta">
+            ${sets} Sätze · ${reps} Wiederholungen · ${formatDuration(seconds)}
+          </div>
+        </div>
+
+        <button
+          class="secondary-btn"
+          onclick="showWorkoutDetails(${index})"
+        >
+          Details
+        </button>
+      </div>
+    `;
+  }).join("");
+}
+
+
+/* ---------- TRAININGSDETAILS ---------- */
+
+function showWorkoutDetails(index) {
+  const workouts = (data.workouts || [])
+    .filter(w => getWorkoutDate(w))
+    .sort((a, b) => getWorkoutDate(b) - getWorkoutDate(a));
+
+  const workout = workouts[index];
+
+  if (!workout) return;
+
+  const results = getWorkoutResults(workout);
+
+  const details = results.length
+    ? results.map((result, i) => {
+        const exercise = db.find(e => e.id === result.exerciseId);
+
+        const name =
+          result.exerciseName ||
+          result.name ||
+          (exercise ? exercise.name : "Übung");
+
+        const value = [];
+
+        if (Number(result.reps) > 0) {
+          value.push(`${result.reps} Wiederholungen`);
+        }
+
+        if (Number(result.seconds) > 0) {
+          value.push(`${result.seconds} Sekunden`);
+        }
+
+        return `
+          <div class="history-detail-row">
+            <span>${i + 1}. ${esc(name)}</span>
+            <strong>${value.join(" · ") || "Ergebnis nicht gespeichert"}</strong>
+          </div>
+        `;
+      }).join("")
+    : `<p>Für dieses Training sind keine einzelnen Satzergebnisse gespeichert.</p>`;
+
+  modal(
+    workout.name || workout.title || "Training",
+    `
+      <div class="detail-section">
+        <p class="muted">${formatDate(getWorkoutDate(workout))}</p>
+        <div class="history-detail-row">
+          <span>Wiederholungen</span>
+          <strong>${getWorkoutReps(workout)}</strong>
+        </div>
+        <div class="history-detail-row">
+          <span>Haltezeit</span>
+          <strong>${formatDuration(getWorkoutSeconds(workout))}</strong>
+        </div>
+        <div class="history-detail-row">
+          <span>Sätze</span>
+          <strong>${getWorkoutSets(workout)}</strong>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>Einzelergebnisse</h3>
+        ${details}
+      </div>
+    `
+  );
+}
+
+
+/* ---------- PROFIL ---------- */
+
+function renderProfile() {
+  const nameInput = $("profileName");
+  const goalInput = $("weeklyGoal");
+  const focusInput = $("trainingFocus");
+
+  if (nameInput) {
+    nameInput.value = data.profile?.name || "";
+  }
+
+  if (goalInput) {
+    goalInput.value = data.weeklyGoal || 3;
+  }
+
+  if (focusInput) {
+    focusInput.value = data.profile?.focus || "Ganzkörper";
+  }
+}
+
+function saveProfile() {
+  const nameInput = $("profileName");
+  const goalInput = $("weeklyGoal");
+  const focusInput = $("trainingFocus");
+
+  data.profile = data.profile || {};
+
+  if (nameInput) {
+    data.profile.name = nameInput.value.trim().slice(0, 30);
+  }
+
+  if (focusInput) {
+    data.profile.focus = focusInput.value;
+  }
+
+  if (goalInput) {
+    const goal = Number(goalInput.value);
+
+    data.weeklyGoal = Math.min(14, Math.max(1, goal || 3));
+  }
+
+  save();
+
+  showToast("Profil gespeichert");
+  refreshAll();
+}
+
+
+/* ---------- JSON-BACKUP EXPORT ---------- */
+
+function exportBackup() {
+  const backup = {
+    app: "ATHLETIC OS",
+    version: "3.1",
+    exportedAt: new Date().toISOString(),
+    data: data
+  };
+
+  const blob = new Blob(
+    [JSON.stringify(backup, null, 2)],
+    { type: "application/json" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = `athletic-os-backup-${dateKey(new Date())}.json`;
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
+
+  showToast("Backup wurde erstellt");
+}
+
+
+/* ---------- JSON-BACKUP IMPORT ---------- */
+
+let pendingImportData = null;
+
+function importBackup(event) {
+  const file = event.target.files?.[0];
+
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(reader.result);
+
+      const imported = parsed.data || parsed;
+
+      if (
+        !imported ||
+        typeof imported !== "object" ||
+        Array.isArray(imported)
+      ) {
+        throw new Error("Ungültiges Backup");
+      }
+
+      if (
+        !Array.isArray(imported.workouts) ||
+        !Array.isArray(imported.customExercises)
+      ) {
+        throw new Error("Backup enthält nicht alle erforderlichen Daten.");
+      }
+
+      pendingImportData = imported;
+
+      modal(
+        "Backup importieren?",
+        `
+          <p>Das aktuelle ATHLETIC OS-Profil wird durch die Daten aus dem Backup ersetzt.</p>
+          <p class="muted">
+            Trainings: ${imported.workouts.length}<br>
+            Eigene Übungen: ${imported.customExercises.length}
+          </p>
+
+          <div class="modal-actions">
+            <button class="secondary-btn" onclick="closeModal()">
+              Abbrechen
+            </button>
+
+            <button class="primary-btn" onclick="confirmImportBackup()">
+              Backup importieren
+            </button>
+          </div>
+        `
+      );
+
+    } catch (error) {
+      showToast("Backup konnte nicht gelesen werden");
+      console.error(error);
+    }
+
+    event.target.value = "";
+  };
+
+  reader.onerror = () => {
+    showToast("Datei konnte nicht geöffnet werden");
+    event.target.value = "";
+  };
+
+  reader.readAsText(file);
+}
+
+
+function confirmImportBackup() {
+  if (!pendingImportData) return;
+
+  try {
+    const imported = pendingImportData;
+
+    data = migrate(imported);
+
+    normalizeCustomExercises();
+
+    save();
+
+    pendingImportData = null;
+    closeModal();
+
+    refreshAll();
+    renderTrainingPicker();
+    renderLibrary();
+    renderPlans();
+    renderPlanPicker();
+    renderDraft();
+    renderSkills();
+    renderProgress();
+    renderProfile();
+
+    showToast("Backup erfolgreich importiert");
+
+  } catch (error) {
+    console.error(error);
+    showToast("Import fehlgeschlagen");
+  }
+}
+
+
+/* ---------- APP INITIALISIEREN ---------- */
+
+function initializeApp() {
+  try {
+    data = migrate(data);
+
+    normalizeCustomExercises();
+
+    refreshAll();
+
+    renderTrainingPicker();
+    renderLibrary();
+    renderPlans();
+    renderPlanPicker();
+    renderDraft();
+    renderSkills();
+    renderProgress();
+    renderProfile();
+
+    if (typeof updateTimerDisplay === "function") {
+      updateTimerDisplay();
+    }
+
+    if (typeof updateStopwatchDisplay === "function") {
+      updateStopwatchDisplay();
+    }
+
+    if (typeof checkAchievements === "function") {
+      checkAchievements();
+    }
+
+    save();
+
+  } catch (error) {
+    console.error("ATHLETIC OS konnte nicht vollständig gestartet werden:", error);
+
+    showToast("Beim Start ist ein Fehler aufgetreten");
+  }
+}
+
+
+/* ---------- START ---------- */
+
+initializeApp();
+
+/* ---------- ENDE TEIL 4 ---------- */
+
 </script>
 </body>
 </html>
